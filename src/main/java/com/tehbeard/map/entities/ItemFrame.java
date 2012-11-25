@@ -1,8 +1,6 @@
 package com.tehbeard.map.entities;
 
-import me.tehbeard.utils.map.utils.MapUtils;
-
-import org.bukkit.inventory.ItemStack;
+import me.tehbeard.utils.map.misc.Item;
 
 import com.tehbeard.mojang.nbt.CompoundTag;
 
@@ -10,7 +8,7 @@ public class ItemFrame extends Entity{
 
     private int tx,ty,tz;
     private byte direction;
-    private ItemStack item;
+    private Item item;
     private float dropChance;
     private byte rotation;
     public ItemFrame(CompoundTag tag) {
@@ -19,7 +17,7 @@ public class ItemFrame extends Entity{
         ty = tag.getInt("TileY");
         tz = tag.getInt("TileZ");
         direction = tag.getByte("Direction");
-        item = MapUtils.makeItemStack(tag.getCompound("Item"));
+        item = new Item(tag.getCompound("Item"));
         dropChance = tag.getFloat("ItemDropChance");
         rotation = tag.getByte("ItemRotation");
     }
@@ -35,7 +33,7 @@ public class ItemFrame extends Entity{
     public byte getDirection() {
         return direction;
     }
-    public ItemStack getItem() {
+    public Item getItem() {
         return item;
     }
     public float getDropChance() {

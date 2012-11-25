@@ -9,6 +9,7 @@ import com.tehbeard.mojang.nbt.ListTag;
 public class Item {
 
     //base data
+    private byte slot;
     private short id;
     private short damage;
     private byte count;
@@ -24,6 +25,7 @@ public class Item {
     private CompoundTag tag;
         
     public Item(CompoundTag tag){
+        slot = tag.contains("Slot") ? tag.getByte("Slot") : -1;
         id = tag.getShort("id");
         damage = tag.getShort("Damage");
         count = tag.getByte("Count");
@@ -34,9 +36,49 @@ public class Item {
             for(CompoundTag ench : (ListTag<CompoundTag>)t.getList("ench")){
                 enchantments.add(new Enchantment(ench));
             }
-            
+            //TODO: ANVIL RELATED DATA
             
         }
+    }
+
+    public byte getSlot() {
+        return slot;
+    }
+
+    public short getId() {
+        return id;
+    }
+
+    public short getDamage() {
+        return damage;
+    }
+
+    public byte getCount() {
+        return count;
+    }
+
+    public List<Enchantment> getEnchantments() {
+        return enchantments;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getLore() {
+        return lore;
+    }
+
+    public int getRepairCost() {
+        return RepairCost;
+    }
+
+    public CompoundTag getTag() {
+        return tag;
     }
     
 }

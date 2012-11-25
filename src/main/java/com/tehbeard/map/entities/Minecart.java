@@ -1,8 +1,6 @@
 package com.tehbeard.map.entities;
 
-import me.tehbeard.utils.map.utils.MapUtils;
-
-import org.bukkit.inventory.ItemStack;
+import me.tehbeard.utils.map.misc.Item;
 
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
@@ -10,23 +8,21 @@ import com.tehbeard.mojang.nbt.ListTag;
 public class Minecart extends Entity{
 
     private int type;
-    private ItemStack[] items;
+    private Item[] items = new Item[27];
     
     
     public Minecart(CompoundTag tag) {
         super(tag);
         type = tag.getInt("Type");
         if(tag.contains("Items")){
-            items = new ItemStack[tag.getList("Items").size()];
-            int i = 0;
             for(CompoundTag t : (ListTag<CompoundTag>)tag.getList("Items")){
-                items[i] = MapUtils.makeItemStack(t);
-                i++;
+                Item i = new Item(t);
+                items[i.getSlot()] = i;
             }
         }
     }
     
-    public ItemStack[] getItems() {
+    public Item[] getItems() {
         return items;
     }
 
