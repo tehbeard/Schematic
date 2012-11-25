@@ -1,9 +1,10 @@
 package me.tehbeard.utils.map.tileEntities;
 
 
+import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
-@TileEntityType(id="RecordPlayer")
+@DataType("RecordPlayer")
 public class TileRecordPlayer extends TileEntity {
 
 	private byte record;

@@ -2,9 +2,10 @@ package me.tehbeard.utils.map.tileEntities;
 
 import java.util.Arrays;
 
+import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
-@TileEntityType(id="Sign")
+@DataType("Sign")
 public class TileSign extends TileEntity {
 
 	private String[] lines;

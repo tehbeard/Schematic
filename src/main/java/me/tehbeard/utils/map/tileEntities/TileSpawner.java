@@ -1,8 +1,9 @@
 package me.tehbeard.utils.map.tileEntities;
 
+import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
-@TileEntityType(id="MobSpawner")
+@DataType("MobSpawner")
 public class TileSpawner extends TileEntity {
 
     private String type;

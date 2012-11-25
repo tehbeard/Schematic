@@ -8,6 +8,7 @@ import java.util.List;
 
 import me.tehbeard.utils.map.tileEntities.*;
 
+import com.tehbeard.map.factory.TileEntityFactory;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
 import com.tehbeard.mojang.nbt.NbtIo;

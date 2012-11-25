@@ -1,9 +1,10 @@
 package me.tehbeard.utils.map.tileEntities;
 
 
+import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
-@TileEntityType(id="Music")
+@DataType("Music")
 public class TileNoteBlock extends TileEntity {
 
 	private byte note;
