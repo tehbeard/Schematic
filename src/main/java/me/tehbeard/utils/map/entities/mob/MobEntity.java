@@ -1,14 +1,15 @@
 package me.tehbeard.utils.map.entities.mob;
 
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 
 import com.tehbeard.map.entities.Entity;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.FloatTag;
 import com.tehbeard.mojang.nbt.ListTag;
 
-import me.tehbeard.utils.map.utils.MapUtils;
+import me.tehbeard.utils.map.misc.Item;
+import me.tehbeard.utils.map.misc.PotionEffect;
+import me.tehbeard.utils.map.misc.MapUtils;
+
 
 public abstract class MobEntity extends Entity {
     
@@ -17,7 +18,7 @@ public abstract class MobEntity extends Entity {
     private short hurtTime;
     private short deathTime;
     private PotionEffect[] activeEffects;
-    private ItemStack[] equipment;
+    private Item[] equipment;
     private float[] dropChance;
     private boolean canPickUpLoot;
     private boolean persistenceRequired;
@@ -33,19 +34,15 @@ public abstract class MobEntity extends Entity {
         activeEffects = new PotionEffect[tag.getList("ActiveEffects").size()];
         int i = 0;
         for(CompoundTag potionTag : (ListTag<CompoundTag>)tag.getList("ActiveEffects")){
-            activeEffects[i] = MapUtils.makePotionEffect(potionTag);
+            activeEffects[i] = new PotionEffect(potionTag);
             i++;
         }
         
-        equipment = new ItemStack[5];
-        i = 0;
-        for(CompoundTag itemTag : (ListTag<CompoundTag>)tag.getList("Equipment")){
-            equipment[i] = MapUtils.makeItemStack(itemTag);
-            i++;
-        }
+        equipment = MapUtils.makeInventory(5, (ListTag<CompoundTag>) tag.getList("Items"));
+        
         dropChance = new float[5];
         i = 0;
-        for(FloatTag chanceTag : (ListTag<FloatTag>)tag.getList("Equipment")){
+        for(FloatTag chanceTag : (ListTag<FloatTag>)tag.getList("DropChances")){
             dropChance[i] = chanceTag.data;
             i++;
         }
@@ -74,7 +71,7 @@ public abstract class MobEntity extends Entity {
         return activeEffects;
     }
 
-    public ItemStack[] getEquipment() {
+    public Item[] getEquipment() {
         return equipment;
     }
 

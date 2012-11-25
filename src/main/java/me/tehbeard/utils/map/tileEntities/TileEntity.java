@@ -1,7 +1,5 @@
 package me.tehbeard.utils.map.tileEntities;
 
-import org.bukkit.Location;
-
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 /**
@@ -20,7 +18,7 @@ public abstract class TileEntity {
 	 * @param z location of tile entity
 	 * @param id name of entity
 	 */
-	public void setData(CompoundTag tag) {
+	public TileEntity(CompoundTag tag) {
 		
 		this.x = tag.getInt("x");
 		this.y = tag.getInt("y");
@@ -40,7 +38,5 @@ public abstract class TileEntity {
 		return id;
 	}
 
-	public abstract void place(Location l);
-	
 	
 }
