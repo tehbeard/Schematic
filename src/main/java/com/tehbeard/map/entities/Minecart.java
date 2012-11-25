@@ -1,6 +1,7 @@
 package com.tehbeard.map.entities;
 
 import me.tehbeard.utils.map.misc.Item;
+import me.tehbeard.utils.map.misc.MapUtils;
 
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
@@ -15,10 +16,7 @@ public class Minecart extends Entity{
         super(tag);
         type = tag.getInt("Type");
         if(tag.contains("Items")){
-            for(CompoundTag t : (ListTag<CompoundTag>)tag.getList("Items")){
-                Item i = new Item(t);
-                items[i.getSlot()] = i;
-            }
+            items = MapUtils.makeInventory(27,(ListTag<CompoundTag>)tag.getList("Items"));
         }
     }
     

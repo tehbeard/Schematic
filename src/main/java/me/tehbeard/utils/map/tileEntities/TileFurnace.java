@@ -3,6 +3,7 @@ package me.tehbeard.utils.map.tileEntities;
 import java.util.Arrays;
 
 import me.tehbeard.utils.map.misc.Item;
+import me.tehbeard.utils.map.misc.MapUtils;
 
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
@@ -17,10 +18,8 @@ public class TileFurnace extends TileEntity{
 	public TileFurnace(CompoundTag tag) {
 		super(tag);
 
-		for(CompoundTag t : (ListTag<CompoundTag>) tag.getList("Items")){
-            Item i = new Item(t);
-            items[i.getSlot()]=i;
-        }
+		items = MapUtils.makeInventory(3,(ListTag<CompoundTag>) tag.getList("Items"));
+		
 		burn = tag.getShort("BurnTime");
 		cook = tag.getShort("CookTime");
 	}

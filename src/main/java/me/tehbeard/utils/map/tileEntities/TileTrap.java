@@ -3,6 +3,7 @@ package me.tehbeard.utils.map.tileEntities;
 import java.util.Arrays;
 
 import me.tehbeard.utils.map.misc.Item;
+import me.tehbeard.utils.map.misc.MapUtils;
 
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
@@ -16,10 +17,7 @@ public class TileTrap extends TileEntity{
 	public TileTrap(CompoundTag tag) {
 		super(tag);
 
-		for(CompoundTag t : (ListTag<CompoundTag>) tag.getList("Items")){
-            Item i = new Item(t);
-            items[i.getSlot()]=i;
-        }
+		items = MapUtils.makeInventory(9,(ListTag<CompoundTag>) tag.getList("Items"));
 	}
 	
 	public Item[] getItems() {

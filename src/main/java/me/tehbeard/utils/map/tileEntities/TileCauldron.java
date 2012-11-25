@@ -3,6 +3,7 @@ package me.tehbeard.utils.map.tileEntities;
 import java.util.Arrays;
 
 import me.tehbeard.utils.map.misc.Item;
+import me.tehbeard.utils.map.misc.MapUtils;
 
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
@@ -18,10 +19,8 @@ public class TileCauldron extends TileEntity{
 		super(tag);
 
 		
-		for(CompoundTag t : (ListTag<CompoundTag>) tag.getList("Items")){
-		    Item i = new Item(t);
-			items[i.getSlot()]=i;
-		}
+		items = MapUtils.makeInventory(4,(ListTag<CompoundTag>) tag.getList("Items"));
+		
 		brew = tag.getShort("BrewTime");
 	}
 
