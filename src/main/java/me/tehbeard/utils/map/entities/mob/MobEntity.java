@@ -23,6 +23,7 @@ public abstract class MobEntity extends Entity {
     private boolean canPickUpLoot;
     private boolean persistenceRequired;
     
+    @SuppressWarnings("unchecked")
     public MobEntity(CompoundTag tag){
         super(tag);
         

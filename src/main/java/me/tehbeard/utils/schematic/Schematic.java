@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.tehbeard.utils.map.misc.MapUtils;
 import me.tehbeard.utils.map.tileEntities.*;
 
-import com.tehbeard.map.factory.TileEntityFactory;
+import com.tehbeard.map.entities.Entity;
+import com.tehbeard.map.factory.WorkerFactory;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
 import com.tehbeard.mojang.nbt.NbtIo;
@@ -33,6 +35,8 @@ public class Schematic {
     private byte[] blockData;
 
     private final List<TileEntity> tileEntities = new ArrayList<TileEntity>();
+    
+    private final List<Entity> entities = new ArrayList<Entity>();
 
     public Schematic(File file) throws IOException{
 
@@ -93,22 +97,38 @@ public class Schematic {
         System.out.println("Schematic block data is width : " + width +
                 " height: " + height +
                 " length: " +length);
-        //prepare the factory
 
-
+        
+        //load tileEntities
         ListTag<CompoundTag> tileEntityTag = (ListTag<CompoundTag>) tag.getList("TileEntities");
 
         for(CompoundTag tileEntity  : tileEntityTag){
-
-            TileEntity t = TileEntityFactory.getInstance().getProduct(tileEntity.getString("id"));
+            
+            TileEntity t = WorkerFactory.getInstance().getTileEntity(tileEntity.getString("id"), tileEntity);
+            
             if(t!=null){
-                t.setData(tileEntity);
-                System.out.println(t.toString());
+                MapUtils.printDebugCon(t.toString());
                 this.tileEntities.add(t);
             }
             else
             {
                 System.out.println("Could not load entity " + tileEntity.getString("id"));
+            }
+        }
+        
+        ListTag<CompoundTag> entityTag = (ListTag<CompoundTag>) tag.getList("Entities");
+
+        for(CompoundTag entity  : entityTag){
+            
+            Entity e = WorkerFactory.getInstance().getEntity(entity.getString("id"), entity);
+            
+            if(e!=null){
+                MapUtils.printDebugCon(e.toString());
+                this.entities.add(e);
+            }
+            else
+            {
+                System.out.println("Could not load entity " + entity.getString("id"));
             }
         }
     }
@@ -148,6 +168,10 @@ public class Schematic {
 
     public final List<TileEntity> getTileEntities() {
         return tileEntities;
+    }
+    
+    public final List<Entity> getEntities() {
+        return entities;
     }
 
 

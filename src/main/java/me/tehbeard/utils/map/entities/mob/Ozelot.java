@@ -1,7 +1,9 @@
 package me.tehbeard.utils.map.entities.mob;
 
+import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
+@DataType("Ozelot")
 public class Ozelot extends MobEntity{
 
     private int type;

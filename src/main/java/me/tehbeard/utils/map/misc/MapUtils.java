@@ -13,4 +13,14 @@ public class MapUtils {
         }
         return ii;
     }
+    
+    public static void printCon(String line){
+        System.out.println("[Schematic] " + line);
+    }
+    
+    public static void printDebugCon(String line){
+        System.out.println("[Schematic][DEBUG] " + line);
+    }
+    
+    
 }

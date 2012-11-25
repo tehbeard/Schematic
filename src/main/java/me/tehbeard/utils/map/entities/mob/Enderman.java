@@ -2,8 +2,10 @@ package me.tehbeard.utils.map.entities.mob;
 
 import me.tehbeard.utils.map.misc.Item;
 
+import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
+@DataType("Enderman")
 public class Enderman extends MobEntity{
 
     private Item carried;

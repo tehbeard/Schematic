@@ -1,7 +1,9 @@
 package com.tehbeard.map.entities;
 
+import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
+@DataType("Painting")
 public class Painting extends Entity{
 
     private int tx,ty,tz;
