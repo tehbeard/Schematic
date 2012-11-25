@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
 
-import com.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
 
 @TileEntityType(id="RecordPlayer")
 public class TileRecordPlayer extends TileEntity {

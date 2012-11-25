@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 
-import com.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
 
 @TileEntityType(id="Sign")
 public class TileSign extends TileEntity {

@@ -8,8 +8,8 @@ import org.bukkit.block.Chest;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.ListTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.ListTag;
 
 
 @TileEntityType(id="Chest")

@@ -2,7 +2,7 @@ package me.tehbeard.utils.map.tileEntities;
 
 import org.bukkit.Location;
 
-import com.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
 
 /**
  * Represents a tile entity

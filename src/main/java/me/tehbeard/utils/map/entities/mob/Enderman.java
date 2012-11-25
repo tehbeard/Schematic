@@ -2,7 +2,7 @@ package me.tehbeard.utils.map.entities.mob;
 
 import org.bukkit.inventory.ItemStack;
 
-import com.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
 
 public class Enderman extends MobEntity{
 

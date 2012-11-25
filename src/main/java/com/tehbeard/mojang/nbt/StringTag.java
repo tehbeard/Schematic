@@ -1,4 +1,4 @@
-package com.mojang.nbt;
+package com.tehbeard.mojang.nbt;
 
 /**
  * Copyright Mojang AB.
@@ -8,28 +8,29 @@ package com.mojang.nbt;
 
 import java.io.*;
 
-public class FloatTag extends Tag {
-    public float data;
+public class StringTag extends Tag {
+    public String data;
 
-    public FloatTag(String name) {
+    public StringTag(String name) {
         super(name);
     }
 
-    public FloatTag(String name, float data) {
+    public StringTag(String name, String data) {
         super(name);
         this.data = data;
+        if (data == null) throw new IllegalArgumentException("Empty string not allowed");
     }
 
     void write(DataOutput dos) throws IOException {
-        dos.writeFloat(data);
+        dos.writeUTF(data);
     }
 
     void load(DataInput dis) throws IOException {
-        data = dis.readFloat();
+        data = dis.readUTF();
     }
 
     public byte getId() {
-        return TAG_Float;
+        return TAG_String;
     }
 
     public String toString() {
@@ -38,14 +39,14 @@ public class FloatTag extends Tag {
 
     @Override
     public Tag copy() {
-        return new FloatTag(getName(), data);
+        return new StringTag(getName(), data);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (super.equals(obj)) {
-            FloatTag o = (FloatTag) obj;
-            return data == o.data;
+            StringTag o = (StringTag) obj;
+            return ((data == null && o.data == null) || (data != null && data.equals(o.data)));
         }
         return false;
     }

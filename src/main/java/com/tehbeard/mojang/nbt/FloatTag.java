@@ -1,4 +1,4 @@
-package com.mojang.nbt;
+package com.tehbeard.mojang.nbt;
 
 /**
  * Copyright Mojang AB.
@@ -8,28 +8,28 @@ package com.mojang.nbt;
 
 import java.io.*;
 
-public class IntTag extends Tag {
-    public int data;
+public class FloatTag extends Tag {
+    public float data;
 
-    public IntTag(String name) {
+    public FloatTag(String name) {
         super(name);
     }
 
-    public IntTag(String name, int data) {
+    public FloatTag(String name, float data) {
         super(name);
         this.data = data;
     }
 
     void write(DataOutput dos) throws IOException {
-        dos.writeInt(data);
+        dos.writeFloat(data);
     }
 
     void load(DataInput dis) throws IOException {
-        data = dis.readInt();
+        data = dis.readFloat();
     }
 
     public byte getId() {
-        return TAG_Int;
+        return TAG_Float;
     }
 
     public String toString() {
@@ -38,13 +38,13 @@ public class IntTag extends Tag {
 
     @Override
     public Tag copy() {
-        return new IntTag(getName(), data);
+        return new FloatTag(getName(), data);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (super.equals(obj)) {
-            IntTag o = (IntTag) obj;
+            FloatTag o = (FloatTag) obj;
             return data == o.data;
         }
         return false;

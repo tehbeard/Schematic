@@ -3,11 +3,11 @@ package me.tehbeard.utils.map.entities.mob;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.FloatTag;
-import com.mojang.nbt.ListTag;
+import com.tehbeard.map.entities.Entity;
+import com.tehbeard.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.FloatTag;
+import com.tehbeard.mojang.nbt.ListTag;
 
-import me.tehbeard.utils.map.entities.Entity;
 import me.tehbeard.utils.map.utils.MapUtils;
 
 public abstract class MobEntity extends Entity {

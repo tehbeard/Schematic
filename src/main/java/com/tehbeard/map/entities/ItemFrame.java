@@ -1,10 +1,10 @@
-package me.tehbeard.utils.map.entities;
+package com.tehbeard.map.entities;
 
 import me.tehbeard.utils.map.utils.MapUtils;
 
 import org.bukkit.inventory.ItemStack;
 
-import com.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
 
 public class ItemFrame extends Entity{
 

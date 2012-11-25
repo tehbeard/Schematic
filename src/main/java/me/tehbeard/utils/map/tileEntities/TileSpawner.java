@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.CreatureSpawner;
 
-import com.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
 
 @TileEntityType(id="MobSpawner")
 public class TileSpawner extends TileEntity {

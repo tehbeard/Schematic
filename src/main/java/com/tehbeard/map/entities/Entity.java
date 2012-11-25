@@ -1,9 +1,9 @@
-package me.tehbeard.utils.map.entities;
+package com.tehbeard.map.entities;
 
-import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.DoubleTag;
-import com.mojang.nbt.FloatTag;
-import com.mojang.nbt.ListTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.DoubleTag;
+import com.tehbeard.mojang.nbt.FloatTag;
+import com.tehbeard.mojang.nbt.ListTag;
 
 /**
  * Base entity NBT storage

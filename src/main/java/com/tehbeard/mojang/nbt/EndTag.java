@@ -1,4 +1,4 @@
-package com.mojang.nbt;
+package com.tehbeard.mojang.nbt;
 
 /**
  * Copyright Mojang AB.

@@ -1,11 +1,11 @@
-package me.tehbeard.utils.map.entities;
+package com.tehbeard.map.entities;
 
 import me.tehbeard.utils.map.utils.MapUtils;
 
 import org.bukkit.inventory.ItemStack;
 
-import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.ListTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.ListTag;
 
 public class Minecart extends Entity{
 

@@ -1,4 +1,4 @@
-package com.mojang.nbt;
+package com.tehbeard.mojang.nbt;
 
 /**
  * Copyright Mojang AB.
@@ -8,28 +8,28 @@ package com.mojang.nbt;
 
 import java.io.*;
 
-public class DoubleTag extends Tag {
-    public double data;
+public class ShortTag extends Tag {
+    public short data;
 
-    public DoubleTag(String name) {
+    public ShortTag(String name) {
         super(name);
     }
 
-    public DoubleTag(String name, double data) {
+    public ShortTag(String name, short data) {
         super(name);
         this.data = data;
     }
 
     void write(DataOutput dos) throws IOException {
-        dos.writeDouble(data);
+        dos.writeShort(data);
     }
 
     void load(DataInput dis) throws IOException {
-        data = dis.readDouble();
+        data = dis.readShort();
     }
 
     public byte getId() {
-        return TAG_Double;
+        return TAG_Short;
     }
 
     public String toString() {
@@ -38,13 +38,13 @@ public class DoubleTag extends Tag {
 
     @Override
     public Tag copy() {
-        return new DoubleTag(getName(), data);
+        return new ShortTag(getName(), data);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (super.equals(obj)) {
-            DoubleTag o = (DoubleTag) obj;
+            ShortTag o = (ShortTag) obj;
             return data == o.data;
         }
         return false;

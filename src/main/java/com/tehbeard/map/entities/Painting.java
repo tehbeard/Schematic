@@ -1,6 +1,6 @@
-package me.tehbeard.utils.map.entities;
+package com.tehbeard.map.entities;
 
-import com.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.CompoundTag;
 
 public class Painting extends Entity{
 
