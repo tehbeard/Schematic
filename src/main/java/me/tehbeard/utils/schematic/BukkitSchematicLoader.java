@@ -38,7 +38,7 @@ public class BukkitSchematicLoader {
     }
 
     public void paste(Location location,int direction){
-
+        direction = 0; //SCREW IT, TOO COMPLEX RIGHT NOW
         WorldVector l = new WorldVector(location.getX(),location.getY(),location.getZ(),location.getWorld().getName());
         addBlocks(l,0,direction);
         addBlocks(l,1,direction);
