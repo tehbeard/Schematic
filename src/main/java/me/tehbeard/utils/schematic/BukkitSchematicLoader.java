@@ -37,12 +37,12 @@ public class BukkitSchematicLoader {
         this.schematic = schematic;
     }
 
-    public void paste(Location location){
+    public void paste(Location location,int direction){
 
         WorldVector l = new WorldVector(location.getX(),location.getY(),location.getZ(),location.getWorld().getName());
-        addBlocks(l,0);
-        addBlocks(l,1);
-        addBlocks(l,2);
+        addBlocks(l,0,direction);
+        addBlocks(l,1,direction);
+        addBlocks(l,2,direction);
 
         World w = Bukkit.getWorld(l.getWorldName());
         for(TileEntity t:schematic.getTileEntities()){
@@ -89,21 +89,25 @@ public class BukkitSchematicLoader {
 
     
 
-    private void addBlocks(WorldVector l,int layer){
+    private void addBlocks(WorldVector l,int layer,int direction){
         World w = Bukkit.getWorld(l.getWorldName());
+        
+        WorldVector baseVector = new WorldVector(0, 0, 0, l.getWorldName());
+        baseVector.addVector(l);
         for(int y = 0;y<schematic.getHeight();y++){
             for(int z = 0;z<schematic.getLength();z++){
                 for(int x = 0;x<schematic.getWidth();x++){
 
                     if(BlockType.getOrder(schematic.getBlockId(x, y, z)) == layer){
-                        WorldVector wv = new WorldVector(0, 0, 0, l.getWorldName());
-                        wv.addVector(l);
-                        wv.addVector(schematic.getOffset());
-
+                        
+                        WorldVector relVector = new WorldVector(schematic.getOffset());
+                        relVector.addVector(new WorldVector(x, y, z, null));
+                        getRotatedPosition(relVector, direction);
+                        relVector.addVector(baseVector);
                         Block b = w.getBlockAt(
-                                wv.getBlockX() + x, 
-                                wv.getBlockY() + y,
-                                wv.getBlockZ() + z
+                                relVector.getBlockX(), 
+                                relVector.getBlockY(),
+                                relVector.getBlockZ()
                                 );
                         
                         b.setTypeId(schematic.getBlockId(x, y, z) & 0xFF, false);
@@ -111,9 +115,9 @@ public class BukkitSchematicLoader {
 
 
                         w.getBlockAt(
-                                wv.getBlockX() + x, 
-                                wv.getBlockY() + y,
-                                wv.getBlockZ() + z
+                                relVector.getBlockX(), 
+                                relVector.getBlockY(),
+                                relVector.getBlockZ()
                                 ).getState().update();
                         
                     }
@@ -124,6 +128,25 @@ public class BukkitSchematicLoader {
     }
 
 
+    public static void main(String[] args){
+        for(int i =0; i > -10; i--){
+            System.out.println("" + i + " : " + (i % 4)); 
+        }
+    }
+    
+    private void getRotatedPosition(WorldVector vector,int direction){
+        
+        
+        int d[] = new int[4];
+        d[0] = vector.getBlockZ();
+        d[1] = vector.getBlockX();
+        d[2] = -vector.getBlockZ();
+        d[3] = -vector.getBlockX();
+        vector.setX(d[(direction+1)%4]);
+        vector.setZ(d[(direction)%4]);
+
+    }
+    
 
     private static void placeChest(Block b,TileChest chest){
         Chest c = (Chest)b.getState();

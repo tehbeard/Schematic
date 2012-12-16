@@ -25,6 +25,14 @@ public class WorldVector {
         this.worldName = worldName;
     }
     
+    public WorldVector(WorldVector v){
+        x = v.x;
+        y = v.y;
+        z = v.z;
+        worldName = v.worldName;
+       
+    }
+    
     public WorldVector(Location l){
         this(l.getX(),l.getY(),l.getZ(),l.getWorld().getName());
     }

@@ -24,7 +24,7 @@ public class TestPlugin extends JavaPlugin {
             schematic = new Schematic(new File("C:/Users/James/Desktop/BeardAch test area/plugins/WorldEdit/schematics/test.schematic"));
             System.out.println(schematic.toString());
             BukkitSchematicLoader loader = new BukkitSchematicLoader(schematic);
-            loader.paste(((Player)sender).getLocation());
+            loader.paste(((Player)sender).getLocation(), Integer.parseInt(args[0]));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
