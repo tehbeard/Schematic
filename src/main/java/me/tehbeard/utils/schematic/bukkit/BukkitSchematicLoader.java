@@ -50,15 +50,15 @@ public class BukkitSchematicLoader {
         World w = Bukkit.getWorld(l.getWorldName());
         for(TileEntity t:schematic.getTileEntities()){
 
+            WorldVector relVector = new WorldVector(schematic.getOffset());
+            relVector.addVector(new WorldVector(t.getX(), t.getY(),t.getZ(), null));
+            getRotatedPosition(relVector, rotations);
+            
             Block b = w.getBlockAt(location.clone().add(
-                    schematic.getOffset().getX(),
-                    schematic.getOffset().getY(),
-                    schematic.getOffset().getZ()
-                    ).add(
-                            t.getX(),
-                            t.getY(), 
-                            t.getZ()
-                            )
+                    relVector.getX(),
+                    relVector.getY(),
+                    relVector.getZ()
+                    )
                     );
 
             if(t instanceof TileChest){

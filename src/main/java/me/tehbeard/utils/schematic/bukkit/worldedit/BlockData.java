@@ -91,6 +91,7 @@ public final class BlockData {
 
      case BlockID.LEVER:
      case BlockID.STONE_BUTTON:
+     case BlockID.WOODEN_BUTTON:
          int thrown = data & 0x8;
          int withoutThrown = data & ~0x8;
          switch (withoutThrown) {
