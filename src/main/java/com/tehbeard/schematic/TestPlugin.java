@@ -3,8 +3,8 @@ package com.tehbeard.schematic;
 import java.io.File;
 import java.io.IOException;
 
-import me.tehbeard.utils.schematic.BukkitSchematicLoader;
 import me.tehbeard.utils.schematic.Schematic;
+import me.tehbeard.utils.schematic.bukkit.BukkitSchematicLoader;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

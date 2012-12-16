@@ -1,4 +1,4 @@
-package me.tehbeard.utils.schematic;
+package me.tehbeard.utils.schematic.bukkit;
 
 
 import me.tehbeard.utils.map.misc.Enchantment;
@@ -13,6 +13,9 @@ import me.tehbeard.utils.map.tileEntities.TileRecordPlayer;
 import me.tehbeard.utils.map.tileEntities.TileSign;
 import me.tehbeard.utils.map.tileEntities.TileSpawner;
 import me.tehbeard.utils.map.tileEntities.TileTrap;
+import me.tehbeard.utils.schematic.BlockType;
+import me.tehbeard.utils.schematic.Schematic;
+import me.tehbeard.utils.schematic.bukkit.worldedit.BlockData;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,12 +40,12 @@ public class BukkitSchematicLoader {
         this.schematic = schematic;
     }
 
-    public void paste(Location location,int direction){
-        direction = 0; //SCREW IT, TOO COMPLEX RIGHT NOW
+    public void paste(Location location,int rotations){
+        
         WorldVector l = new WorldVector(location.getX(),location.getY(),location.getZ(),location.getWorld().getName());
-        addBlocks(l,0,direction);
-        addBlocks(l,1,direction);
-        addBlocks(l,2,direction);
+        addBlocks(l,0,rotations);
+        addBlocks(l,1,rotations);
+        addBlocks(l,2,rotations);
 
         World w = Bukkit.getWorld(l.getWorldName());
         for(TileEntity t:schematic.getTileEntities()){
@@ -68,7 +71,7 @@ public class BukkitSchematicLoader {
             if(t instanceof TileSign){
                 placeSign(b,(TileSign)t);
             }
-            
+
             if(t instanceof TileNoteBlock){
                 placeNoteBlock(b,(TileNoteBlock)t);
             }
@@ -87,11 +90,11 @@ public class BukkitSchematicLoader {
         }
     }
 
-    
 
-    private void addBlocks(WorldVector l,int layer,int direction){
+
+    private void addBlocks(WorldVector l,int layer,int rotations){
         World w = Bukkit.getWorld(l.getWorldName());
-        
+
         WorldVector baseVector = new WorldVector(0, 0, 0, l.getWorldName());
         baseVector.addVector(l);
         for(int y = 0;y<schematic.getHeight();y++){
@@ -99,19 +102,25 @@ public class BukkitSchematicLoader {
                 for(int x = 0;x<schematic.getWidth();x++){
 
                     if(BlockType.getOrder(schematic.getBlockId(x, y, z)) == layer){
-                        
+
                         WorldVector relVector = new WorldVector(schematic.getOffset());
                         relVector.addVector(new WorldVector(x, y, z, null));
-                        getRotatedPosition(relVector, direction);
+                        getRotatedPosition(relVector, rotations);
                         relVector.addVector(baseVector);
                         Block b = w.getBlockAt(
                                 relVector.getBlockX(), 
                                 relVector.getBlockY(),
                                 relVector.getBlockZ()
                                 );
-                        
-                        b.setTypeId(schematic.getBlockId(x, y, z) & 0xFF, false);
-                        b.setData(schematic.getBlockData(x, y, z),false);
+
+                        int type = schematic.getBlockId(x, y, z) & 0xFF;
+                        b.setTypeId(type, false);
+
+                        byte data = schematic.getBlockData(x, y, z);
+                        for(int i =0;i<rotations;i++){
+                            data = (byte) BlockData.rotate90(type, data);
+                        }
+                        b.setData(data,false);
 
 
                         w.getBlockAt(
@@ -119,7 +128,7 @@ public class BukkitSchematicLoader {
                                 relVector.getBlockY(),
                                 relVector.getBlockZ()
                                 ).getState().update();
-                        
+
                     }
 
                 }	
@@ -133,10 +142,10 @@ public class BukkitSchematicLoader {
             System.out.println("" + i + " : " + (i % 4)); 
         }
     }
-    
+
     private void getRotatedPosition(WorldVector vector,int direction){
-        
-        
+
+
         int d[] = new int[4];
         d[0] = vector.getBlockZ();
         d[1] = vector.getBlockX();
@@ -146,7 +155,7 @@ public class BukkitSchematicLoader {
         vector.setZ(d[(direction)%4]);
 
     }
-    
+
 
     private static void placeChest(Block b,TileChest chest){
         Chest c = (Chest)b.getState();
@@ -162,7 +171,7 @@ public class BukkitSchematicLoader {
         c.update(true);
 
     }
-    
+
     private static void placeSign(Block b, TileSign t) {
         Sign s = (Sign) b.getState();
         int i =0;
@@ -171,16 +180,16 @@ public class BukkitSchematicLoader {
             i++;
         }
         s.update(true);
-        
+
     }
-    
+
     private static void placeNoteBlock(Block b, TileNoteBlock t) {
         NoteBlock s = (NoteBlock) b.getState();
         s.setRawNote(t.getNote());
         s.update(true);
-        
+
     }
-    
+
     private static void placeFurnace(Block b, TileFurnace t) {
         Furnace f = (Furnace) b.getState();
 
@@ -189,43 +198,43 @@ public class BukkitSchematicLoader {
         doInventory(f.getInventory(), t.getItems());
         f.update(true);
     }
-    
+
     private static void placeBrewStand(Block b, TileCauldron t) {
         BrewingStand bs = (BrewingStand)b.getState();
         bs.setBrewingTime(t.getBrew());
-        
-        
+
+
         doInventory(bs.getInventory(), t.getItems());
-        
+
         bs.update(true);
     }
-    
+
     private static void placeJukebox(Block b, TileRecordPlayer t) {
         Jukebox jb = (Jukebox)b.getState();
         jb.setRawData(t.getRecord());
         jb.update(true);
-        
+
     }
 
     private static void placeSpawner(Block b,TileSpawner t){
         CreatureSpawner spawner = (CreatureSpawner) b.getState();
         spawner.setCreatureTypeByName(t.getId());
     }
-    
-    
+
+
     private static ItemStack makeItemStack(Item item){
         ItemStack is = new ItemStack(item.getId(),item.getCount(),item.getDamage());
         for(Enchantment e : item.getEnchantments()){
             is.addUnsafeEnchantment(org.bukkit.enchantments.Enchantment.getById(e.getType()), e.getLvl());
         }
         return is;
-        
+
     }
-    
+
     private static void doInventory(Inventory inv, Item[] items){
         for(Item item : items){
             if(item == null){continue;}
-            
+
             inv.setItem(item.getSlot(),makeItemStack(item));
         }
     }
