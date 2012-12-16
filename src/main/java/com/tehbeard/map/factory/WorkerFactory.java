@@ -12,7 +12,6 @@ import com.tehbeard.mojang.nbt.CompoundTag;
 import me.tehbeard.utils.factory.ConfigurableFactory;
 import me.tehbeard.utils.map.entities.mob.*;
 import me.tehbeard.utils.map.tileEntities.*;
-import me.tehbeard.utils.schematic.worker.SchematicPartWorker;
 
 public class WorkerFactory {
     private FactoryObj<TileEntity> tileEntityFactory = new FactoryObj<TileEntity>();

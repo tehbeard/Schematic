@@ -26,9 +26,10 @@ public class TileChest extends TileEntity{
     }
 
     @Override
-	public String toString() {
-		return "TileChest [items=" + Arrays.toString(items) + "]";
-	}
+    public String toString() {
+        return "TileChest [items=" + Arrays.toString(items) + ", getX()="
+                + getX() + ", getY()=" + getY() + ", getZ()=" + getZ() + "]";
+    }
 	
 
 

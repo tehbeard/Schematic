@@ -1,4 +1,6 @@
-package me.tehbeard.utils.schematic.worker;
+package me.tehbeard.utils.map.misc;
+
+import org.bukkit.Location;
 
 public class WorldVector {
     
@@ -21,6 +23,10 @@ public class WorldVector {
         this.y = y;
         this.z = z;
         this.worldName = worldName;
+    }
+    
+    public WorldVector(Location l){
+        this(l.getX(),l.getY(),l.getZ(),l.getWorld().getName());
     }
     
     public double getX() {
@@ -47,6 +53,35 @@ public class WorldVector {
     public void setWorldName(String worldName) {
         this.worldName = worldName;
     }
-    
 
+    @Override
+    public String toString() {
+        return "WorldVector [x=" + x + ", y=" + y + ", z=" + z + ", worldName="
+                + worldName + "]";
+    }
+    
+    public WorldVector addVector(WorldVector other){
+        x += other.x;
+        y += other.y;
+        z += other.z;
+        return this;
+    }
+    public WorldVector subtractVector(WorldVector other){
+        x -= other.x;
+        y -= other.y;
+        z -= other.z;
+        return this;
+    }
+
+    public int getBlockX(){
+        return (int) x;
+    }
+    
+    public int getBlockY(){
+        return (int) y;
+    }
+    
+    public int getBlockZ(){
+        return (int) z;
+    }
 }

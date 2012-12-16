@@ -1,0 +1,9 @@
+name: Schematic
+main: com.tehbeard.schematic.TestPlugin
+version: 0.1
+authors: [Tehbeard]
+description: Schematic test plugin
+commands:
+    pastein:
+        description: Paste in 
+        usage: /<command>

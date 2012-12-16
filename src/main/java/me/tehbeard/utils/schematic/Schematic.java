@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.tehbeard.utils.map.misc.MapUtils;
+import me.tehbeard.utils.map.misc.WorldVector;
 import me.tehbeard.utils.map.tileEntities.*;
-import me.tehbeard.utils.schematic.worker.WorldVector;
 
 import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.factory.WorkerFactory;
@@ -41,6 +41,14 @@ public class Schematic {
     private final List<TileEntity> tileEntities = new ArrayList<TileEntity>();
 
     private final List<Entity> entities = new ArrayList<Entity>();
+
+    public WorldVector getOrigin() {
+        return origin;
+    }
+
+    public WorldVector getOffset() {
+        return offset;
+    }
 
     public Schematic(File file) throws IOException{
 
@@ -129,7 +137,7 @@ public class Schematic {
         }
     }
 
-    public int getBlockId(int x,int y,int z){
+    public byte getBlockId(int x,int y,int z){
 
         int index =  (y * width * length) + (z * width) + x;
         if(index < 0 || index >= blocks.length){
@@ -171,6 +179,17 @@ public class Schematic {
     }
 
 
-
+    
+    public String toString(){
+        return "Schematic {" +
+        		"[w: " + getWidth() + ", " +
+        		"l: " + getLength() + ", " +
+        		"h: " + getHeight() + "]\n" +
+        				"origin: " + origin + "\n" +
+        				"offset: " + offset + "\n" +
+        				"\n}";
+        		
+                
+    }
 
 }

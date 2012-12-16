@@ -19,6 +19,11 @@ public class Enchantment {
     public short getLvl() {
         return lvl;
     }
-    
 
+    @Override
+    public String toString() {
+        return "Enchantment [type=" + type + ", lvl=" + lvl + "]";
+    }
+    
+    
 }

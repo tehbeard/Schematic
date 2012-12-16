@@ -24,6 +24,7 @@ public class Item {
     //extra data
     private CompoundTag tag;
         
+    @SuppressWarnings("unchecked")
     public Item(CompoundTag tag){
         slot = tag.contains("Slot") ? tag.getByte("Slot") : -1;
         id = tag.getShort("id");
@@ -80,5 +81,16 @@ public class Item {
     public CompoundTag getTag() {
         return tag;
     }
+
+    @Override
+    public String toString() {
+        return "Item [slot=" + slot + ", id=" + id + ", damage=" + damage
+                + ", count=" + count + ", enchantments=" + enchantments
+                + ", color=" + color + ", name=" + name + ", lore=" + lore
+                + ", RepairCost=" + RepairCost + "]";
+    }
+
+
+    
     
 }
