@@ -1,6 +1,5 @@
 package com.tehbeard.map.factory;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +7,6 @@ import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.entities.ItemFrame;
 import com.tehbeard.map.entities.Minecart;
 import com.tehbeard.map.entities.Painting;
-import com.tehbeard.map.factory.APIWorker.API;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 import me.tehbeard.utils.factory.ConfigurableFactory;
@@ -21,7 +19,6 @@ public class WorkerFactory {
 
     private FactoryObj<Entity> entityFactory = new FactoryObj<Entity>();
     
-    private Map<APIWorker.API,Map<String,SchematicPartWorker>> workers = new HashMap<APIWorker.API, Map<String,SchematicPartWorker>>();
     
     private class FactoryObj<T> extends ConfigurableFactory<T, DataType> {
 
@@ -63,17 +60,7 @@ public class WorkerFactory {
         entityFactory.addProduct(entity);
     }
     
-    public void addWorker(SchematicPartWorker worker){
-        
-        APIWorker api = worker.getClass().getAnnotation(APIWorker.class);
-        ConsumesTypes type = worker.getClass().getAnnotation(ConsumesTypes.class);
-        if(api == null || type ==null){throw new IllegalArgumentException("Invalid Annotation configuration");}
-        
-        Map<String, SchematicPartWorker> apiCol = workers.get(api.value());
-        for(String s : type.value()){
-            apiCol.put(s, worker);
-        }
-    }
+    
     
     private static WorkerFactory instance;
     /**
@@ -133,16 +120,6 @@ public class WorkerFactory {
         return entityFactory.make(id, data);
     }
     
-    /**
-     * Get the schematic worker for a entity/tileEntity
-     * @param api
-     * @param id
-     * @return
-     */
-    public SchematicPartWorker getWorker(API api,String id){
-        return workers.get(api).get(id);
-    }
-
 
     public static WorkerFactory getInstance() {
         return instance;

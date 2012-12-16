@@ -8,6 +8,7 @@ import java.util.List;
 
 import me.tehbeard.utils.map.misc.MapUtils;
 import me.tehbeard.utils.map.tileEntities.*;
+import me.tehbeard.utils.schematic.worker.WorldVector;
 
 import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.factory.WorkerFactory;
@@ -26,40 +27,25 @@ public class Schematic {
     private short height = 0;
     private short length = 0;
 
-    private int oX = 0;
-    private int oY = 0;
-    private int oZ = 0;
+
+    private WorldVector origin;
+
+    private WorldVector offset;
+
+
 
     private byte[] blocks;
     private byte[] addBlocks;
     private byte[] blockData;
 
     private final List<TileEntity> tileEntities = new ArrayList<TileEntity>();
-    
+
     private final List<Entity> entities = new ArrayList<Entity>();
 
     public Schematic(File file) throws IOException{
 
         loadSchematic(file);
     }
-
-
-    public int getoX() {
-        return oX;
-    }
-
-
-
-    public int getoY() {
-        return oY;
-    }
-
-
-
-    public int getoZ() {
-        return oZ;
-    }
-
 
     /**
      * loads the schematic data into memory
@@ -77,9 +63,19 @@ public class Schematic {
         height = tag.getShort("Height");
         length = tag.getShort("Length");
 
-        oX = tag.getInt("WEOriginX");
-        oY = tag.getInt("WEOriginY");
-        oZ = tag.getInt("WEOriginZ");
+        origin = new WorldVector(
+                tag.getInt("WEOriginX"),
+                tag.getInt("WEOriginY"),
+                tag.getInt("WEOriginZ"),
+                null
+                );
+        
+        offset = new WorldVector(
+                tag.getInt("WEOffsetX"),
+                tag.getInt("WEOffsetY"),
+                tag.getInt("WEOffsetZ"),
+                null
+                );
 
 
         int size = width+height+length;
@@ -98,14 +94,14 @@ public class Schematic {
                 " height: " + height +
                 " length: " +length);
 
-        
+
         //load tileEntities
         ListTag<CompoundTag> tileEntityTag = (ListTag<CompoundTag>) tag.getList("TileEntities");
 
         for(CompoundTag tileEntity  : tileEntityTag){
-            
+
             TileEntity t = WorkerFactory.getInstance().getTileEntity(tileEntity.getString("id"), tileEntity);
-            
+
             if(t!=null){
                 MapUtils.printDebugCon(t.toString());
                 this.tileEntities.add(t);
@@ -115,13 +111,13 @@ public class Schematic {
                 System.out.println("Could not load entity " + tileEntity.getString("id"));
             }
         }
-        
+
         ListTag<CompoundTag> entityTag = (ListTag<CompoundTag>) tag.getList("Entities");
 
         for(CompoundTag entity  : entityTag){
-            
+
             Entity e = WorkerFactory.getInstance().getEntity(entity.getString("id"), entity);
-            
+
             if(e!=null){
                 MapUtils.printDebugCon(e.toString());
                 this.entities.add(e);
@@ -169,7 +165,7 @@ public class Schematic {
     public final List<TileEntity> getTileEntities() {
         return tileEntities;
     }
-    
+
     public final List<Entity> getEntities() {
         return entities;
     }
