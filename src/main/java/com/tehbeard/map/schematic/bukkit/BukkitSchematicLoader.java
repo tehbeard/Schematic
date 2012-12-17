@@ -4,6 +4,7 @@ package com.tehbeard.map.schematic.bukkit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BrewingStand;
@@ -14,12 +15,16 @@ import org.bukkit.block.Furnace;
 import org.bukkit.block.Jukebox;
 import org.bukkit.block.NoteBlock;
 import org.bukkit.block.Sign;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
-import com.tehbeard.map.misc.Enchantment;
+import com.tehbeard.map.misc.ItemEnchantment;
 import com.tehbeard.map.misc.Item;
+import com.tehbeard.map.misc.MapUtils;
 import com.tehbeard.map.misc.WorldVector;
 import com.tehbeard.map.schematic.BlockType;
 import com.tehbeard.map.schematic.Schematic;
@@ -107,7 +112,7 @@ public class BukkitSchematicLoader {
 
                         WorldVector relVector = new WorldVector(schematic.getOffset());
                         relVector.addVector(new WorldVector(x, y, z, null));
-                        getRotatedPosition(relVector, rotations);
+                        relVector.rotateVector(rotations);
                         relVector.addVector(baseVector);
                         Block b = w.getBlockAt(
                                 relVector.getBlockX(), 
@@ -140,18 +145,7 @@ public class BukkitSchematicLoader {
         }
     }
 
-    private void getRotatedPosition(WorldVector vector,int direction){
-
-
-        int d[] = new int[4];
-        d[0] = vector.getBlockZ();
-        d[1] = vector.getBlockX();
-        d[2] = -vector.getBlockZ();
-        d[3] = -vector.getBlockX();
-        vector.setX(d[(direction+1)%4]);
-        vector.setZ(d[(direction)%4]);
-
-    }
+    
 
 
     private static void placeChest(Block b,TileChest chest){
@@ -218,19 +212,40 @@ public class BukkitSchematicLoader {
         spawner.setCreatureTypeByName(t.getId());
     }
 
-
     private static ItemStack makeItemStack(Item item){
         ItemStack is = new ItemStack(item.getId(),item.getCount(),item.getDamage());
         
         ItemMeta meta = is.getItemMeta();
         
-        for(Enchantment e : item.getEnchantments()){
-            meta.addEnchant(org.bukkit.enchantments.Enchantment.getById(e.getType()), e.getLvl(),true);
+        for(ItemEnchantment e : item.getEnchantments()){
+            meta.addEnchant(Enchantment.getById(e.getType()), e.getLvl(),true);
         }
+        
         if(item.getName()!=null){
             meta.setDisplayName(item.getName());
         }
         
+        if(item.getLore()!=null){
+            meta.setLore(item.getLore());
+        }
+        
+        switch(is.getType()){
+        case BOOK_AND_QUILL:
+        case  WRITTEN_BOOK:
+            BookMeta bookMeta = (BookMeta)meta;
+            bookMeta.setPages(item.getBookPages());
+            if(is.getType() == Material.WRITTEN_BOOK){
+                bookMeta.setAuthor(item.getBookAuthor());
+                bookMeta.setTitle(item.getBookTitle());
+            }
+            break;
+        case SKULL_ITEM:
+            if(item.getSkullOwner() !=null){
+                ((SkullMeta)meta).setOwner(item.getSkullOwner());
+            }
+            break;
+        }
+
         
         is.setItemMeta(meta);
         return is;

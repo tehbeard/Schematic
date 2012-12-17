@@ -4,7 +4,7 @@ package com.tehbeard.map.entities.mob;
 import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.misc.Item;
 import com.tehbeard.map.misc.MapUtils;
-import com.tehbeard.map.misc.PotionEffect;
+import com.tehbeard.map.misc.ItemPotionEffect;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.FloatTag;
 import com.tehbeard.mojang.nbt.ListTag;
@@ -17,7 +17,7 @@ public abstract class MobEntity extends Entity {
     private short attackTime;
     private short hurtTime;
     private short deathTime;
-    private PotionEffect[] activeEffects;
+    private ItemPotionEffect[] activeEffects;
     private Item[] equipment;
     private float[] dropChance;
     private boolean canPickUpLoot;
@@ -32,10 +32,10 @@ public abstract class MobEntity extends Entity {
         hurtTime = tag.getShort("HurtTime");
         deathTime = tag.getShort("DeathTime");
         
-        activeEffects = new PotionEffect[tag.getList("ActiveEffects").size()];
+        activeEffects = new ItemPotionEffect[tag.getList("ActiveEffects").size()];
         int i = 0;
         for(CompoundTag potionTag : (ListTag<CompoundTag>)tag.getList("ActiveEffects")){
-            activeEffects[i] = new PotionEffect(potionTag);
+            activeEffects[i] = new ItemPotionEffect(potionTag);
             i++;
         }
         
@@ -68,7 +68,7 @@ public abstract class MobEntity extends Entity {
         return deathTime;
     }
 
-    public PotionEffect[] getActiveEffects() {
+    public ItemPotionEffect[] getActiveEffects() {
         return activeEffects;
     }
 

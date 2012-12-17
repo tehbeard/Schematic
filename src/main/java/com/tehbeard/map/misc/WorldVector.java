@@ -92,4 +92,14 @@ public class WorldVector {
     public int getBlockZ(){
         return (int) z;
     }
+    
+    public void rotateVector(int direction){
+        int d[] = new int[4];
+        d[0] = getBlockZ();
+        d[1] = getBlockX();
+        d[2] = -getBlockZ();
+        d[3] = -getBlockX();
+        setX(d[(direction+1)%4]);
+        setZ(d[(direction)%4]);
+    }
 }
