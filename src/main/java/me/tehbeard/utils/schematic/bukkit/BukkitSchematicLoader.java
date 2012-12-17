@@ -42,7 +42,7 @@ public class BukkitSchematicLoader {
 
     public void paste(Location location,int rotations){
         
-        WorldVector l = new WorldVector(location.getX(),location.getY(),location.getZ(),location.getWorld().getName());
+        WorldVector l = new WorldVector(location.getBlockX(),location.getBlockY(),location.getBlockZ(),location.getWorld().getName());
         addBlocks(l,0,rotations);
         addBlocks(l,1,rotations);
         addBlocks(l,2,rotations);
@@ -114,20 +114,15 @@ public class BukkitSchematicLoader {
                                 );
 
                         int type = schematic.getBlockId(x, y, z) & 0xFF;
-                        b.setTypeId(type, false);
-
                         byte data = schematic.getBlockData(x, y, z);
                         for(int i =0;i<rotations;i++){
                             data = (byte) BlockData.rotate90(type, data);
                         }
+                        b.setTypeId(type,false);
                         b.setData(data,false);
 
 
-                        w.getBlockAt(
-                                relVector.getBlockX(), 
-                                relVector.getBlockY(),
-                                relVector.getBlockZ()
-                                ).getState().update();
+                        b.getState().update();
 
                     }
 
