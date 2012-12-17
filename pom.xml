@@ -5,12 +5,25 @@
 	<artifactId>Schematic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Schematic Reader</name>
+	
+	<repositories>
+    <!-- Repository for Bukkit -->
+      <repository>
+        <id>bukkit-repo</id>
+        <url>http://repo.bukkit.org/content/groups/public/</url>
+      </repository>
+   </repositories>
 	<dependencies>
 		<dependency>
 			<groupId>me.tehbeard</groupId>
 			<artifactId>utils</artifactId>
 			<version>1.2-SNAPSHOT</version>
 
+		</dependency>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.4.5-R0.3-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<description>Library for reading schematic files</description>

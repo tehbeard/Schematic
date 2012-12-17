@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
+import com.tehbeard.mojang.nbt.StringTag;
+import com.tehbeard.mojang.nbt.Tag;
 
 public class Item {
 
@@ -16,29 +18,46 @@ public class Item {
     private List<Enchantment> enchantments = new ArrayList<Enchantment>();
     
     //anvil data
-    private int color;
-    private String name;
-    private List<String> lore;
-    private int RepairCost;
+    private int color = 0;
+    private String name = null;
+    private List<String> itemLore = null;
+    private int RepairCost = 0;
     
     //extra data
     private CompoundTag tag;
         
     @SuppressWarnings("unchecked")
-    public Item(CompoundTag tag){
-        slot = tag.contains("Slot") ? tag.getByte("Slot") : -1;
-        id = tag.getShort("id");
-        damage = tag.getShort("Damage");
-        count = tag.getByte("Count");
-        if(tag.contains("tag")){
+    public Item(CompoundTag itemTag){
+        slot = itemTag.contains("Slot") ? itemTag.getByte("Slot") : -1;
+        id = itemTag.getShort("id");
+        damage = itemTag.getShort("Damage");
+        count = itemTag.getByte("Count");
+        if(itemTag.contains("tag")){
             
-            CompoundTag t= tag.getCompound("tag");
-            this.tag = (CompoundTag) t.copy();
-            for(CompoundTag ench : (ListTag<CompoundTag>)t.getList("ench")){
+            CompoundTag tagTag = itemTag.getCompound("tag");
+            this.tag = (CompoundTag) tagTag.copy();
+            for(CompoundTag ench : (ListTag<CompoundTag>)tagTag.getList("ench")){
                 enchantments.add(new Enchantment(ench));
             }
             //TODO: ANVIL RELATED DATA
-            
+            if(tagTag.contains("display")){
+                CompoundTag displayTag = tagTag.getCompound("display");
+                
+                //Item color
+                color = displayTag.contains("color") ? displayTag.getInt("color") : 0;
+                
+                //item name
+                name  = displayTag.contains("Name") ? displayTag.getString("name") : null;
+                
+                //item lore
+                if(displayTag.contains("Lore")){
+                    itemLore = new ArrayList<String>();
+                    for(StringTag lore : (ListTag<StringTag>)displayTag.getList("Lore")){
+                        itemLore.add(lore.data);
+                    }
+                    
+                }
+            }
         }
     }
 
@@ -71,7 +90,7 @@ public class Item {
     }
 
     public List<String> getLore() {
-        return lore;
+        return itemLore;
     }
 
     public int getRepairCost() {
@@ -86,7 +105,7 @@ public class Item {
     public String toString() {
         return "Item [slot=" + slot + ", id=" + id + ", damage=" + damage
                 + ", count=" + count + ", enchantments=" + enchantments
-                + ", color=" + color + ", name=" + name + ", lore=" + lore
+                + ", color=" + color + ", name=" + name + ", itemLore=" + itemLore
                 + ", RepairCost=" + RepairCost + "]";
     }
 

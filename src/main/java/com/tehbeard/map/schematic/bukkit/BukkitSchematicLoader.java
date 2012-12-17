@@ -16,6 +16,7 @@ import org.bukkit.block.NoteBlock;
 import org.bukkit.block.Sign;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.tehbeard.map.misc.Enchantment;
 import com.tehbeard.map.misc.Item;
@@ -220,9 +221,18 @@ public class BukkitSchematicLoader {
 
     private static ItemStack makeItemStack(Item item){
         ItemStack is = new ItemStack(item.getId(),item.getCount(),item.getDamage());
+        
+        ItemMeta meta = is.getItemMeta();
+        
         for(Enchantment e : item.getEnchantments()){
-            is.addUnsafeEnchantment(org.bukkit.enchantments.Enchantment.getById(e.getType()), e.getLvl());
+            meta.addEnchant(org.bukkit.enchantments.Enchantment.getById(e.getType()), e.getLvl(),true);
         }
+        if(item.getName()!=null){
+            meta.setDisplayName(item.getName());
+        }
+        
+        
+        is.setItemMeta(meta);
         return is;
 
     }
