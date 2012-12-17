@@ -3,13 +3,14 @@ package com.tehbeard.schematic;
 import java.io.File;
 import java.io.IOException;
 
-import me.tehbeard.utils.schematic.Schematic;
-import me.tehbeard.utils.schematic.bukkit.BukkitSchematicLoader;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.tehbeard.map.schematic.Schematic;
+import com.tehbeard.map.schematic.bukkit.BukkitSchematicLoader;
 
 public class TestPlugin extends JavaPlugin {
 

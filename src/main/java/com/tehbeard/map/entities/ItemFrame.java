@@ -1,8 +1,8 @@
 package com.tehbeard.map.entities;
 
-import me.tehbeard.utils.map.misc.Item;
 
 import com.tehbeard.map.factory.DataType;
+import com.tehbeard.map.misc.Item;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 @DataType("ItemFrame")

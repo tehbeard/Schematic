@@ -7,11 +7,11 @@ import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.entities.ItemFrame;
 import com.tehbeard.map.entities.Minecart;
 import com.tehbeard.map.entities.Painting;
+import com.tehbeard.map.entities.mob.*;
+import com.tehbeard.map.tileEntities.*;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 import me.tehbeard.utils.factory.ConfigurableFactory;
-import me.tehbeard.utils.map.entities.mob.*;
-import me.tehbeard.utils.map.tileEntities.*;
 
 public class WorkerFactory {
     private FactoryObj<TileEntity> tileEntityFactory = new FactoryObj<TileEntity>();
