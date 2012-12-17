@@ -59,7 +59,7 @@ public class BukkitSchematicLoader {
 
             WorldVector relVector = new WorldVector(schematic.getOffset());
             relVector.addVector(new WorldVector(t.getX(), t.getY(),t.getZ(), null));
-            getRotatedPosition(relVector, rotations);
+            relVector.rotateVector(rotations);
             
             Block b = w.getBlockAt(location.clone().add(
                     relVector.getX(),
