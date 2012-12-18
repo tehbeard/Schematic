@@ -22,32 +22,36 @@ import com.tehbeard.mojang.nbt.NbtIo;
  *
  */
 public class Schematic {
+    
+    
+    
 
+    //SIZE
     private short width = 0;
     private short height = 0;
     private short length = 0;
 
 
+    //Original location in world
     private WorldVector origin;
 
+    //Offset vector
     private WorldVector offset;
-
-
 
     private byte[] blocks;
     private byte[] addBlocks;
     private byte[] blockData;
+    
+    private byte[] layer;
 
     private final List<TileEntity> tileEntities = new ArrayList<TileEntity>();
 
     private final List<Entity> entities = new ArrayList<Entity>();
 
-    public WorldVector getOrigin() {
-        return origin;
-    }
-
-    public WorldVector getOffset() {
-        return offset;
+    public Schematic(short width,short height,short length){
+        this.width = width;
+        this.height = height;
+        this.length = length;
     }
 
     public Schematic(File file) throws IOException{
@@ -86,11 +90,16 @@ public class Schematic {
                 );
 
 
-        int size = width+height+length;
+        int size = width*height*length;
         blocks = new byte[size];
         addBlocks = new byte[size];
         blockData = new byte[size];
+        
+        layer = new byte[size];
 
+        if(tag.contains("Layers")){
+            layer = tag.getByteArray("Layers");
+        }
         //read in block data;
         blocks = tag.getByteArray("Blocks");
         if(tag.contains("AddBlocks")){
@@ -177,6 +186,15 @@ public class Schematic {
     public final List<Entity> getEntities() {
         return entities;
     }
+    
+    public WorldVector getOrigin() {
+        return origin;
+    }
+
+    public WorldVector getOffset() {
+        return offset;
+    }
+
 
 
     
