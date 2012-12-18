@@ -22,9 +22,9 @@ import com.tehbeard.mojang.nbt.NbtIo;
  *
  */
 public class Schematic {
-    
-    
-    
+
+
+
 
     //SIZE
     private short width = 0;
@@ -41,8 +41,8 @@ public class Schematic {
     private byte[] blocks;
     private byte[] addBlocks;
     private byte[] blockData;
-    
-    private byte[] layer;
+
+    private byte[] layers;
 
     private final List<TileEntity> tileEntities = new ArrayList<TileEntity>();
 
@@ -52,11 +52,25 @@ public class Schematic {
         this.width = width;
         this.height = height;
         this.length = length;
+
+        resetArrays();
+
     }
 
     public Schematic(File file) throws IOException{
 
         loadSchematic(file);
+    }
+
+    /**
+     * Resets the arrays
+     */
+    private void resetArrays(){
+        int size = width*height*length;
+        blocks = new byte[size];
+        addBlocks = new byte[size];
+        blockData = new byte[size];
+        layers = new byte[size];
     }
 
     /**
@@ -81,7 +95,7 @@ public class Schematic {
                 tag.getInt("WEOriginZ"),
                 null
                 );
-        
+
         offset = new WorldVector(
                 tag.getInt("WEOffsetX"),
                 tag.getInt("WEOffsetY"),
@@ -90,15 +104,11 @@ public class Schematic {
                 );
 
 
-        int size = width*height*length;
-        blocks = new byte[size];
-        addBlocks = new byte[size];
-        blockData = new byte[size];
-        
-        layer = new byte[size];
+        resetArrays();
+
 
         if(tag.contains("Layers")){
-            layer = tag.getByteArray("Layers");
+            layers = tag.getByteArray("Layers");
         }
         //read in block data;
         blocks = tag.getByteArray("Blocks");
@@ -146,6 +156,45 @@ public class Schematic {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public void saveSchematic(File file) throws IOException{
+        CompoundTag tag  = new CompoundTag("schematic");
+        tag.putString("Materials", "Alpha");
+
+
+        tag.putShort("Width",width);
+        tag.putShort("Height",height);
+        tag.putShort("Length",length);
+
+
+        tag.putInt("WEOriginX",origin.getBlockX());
+        tag.putInt("WEOriginY",origin.getBlockY());
+        tag.putInt("WEOriginZ",origin.getBlockZ());
+
+        tag.putInt("WEOffsetX",offset.getBlockX());
+        tag.putInt("WEOffsetY",offset.getBlockY());
+        tag.putInt("WEOffsetZ",offset.getBlockZ());
+
+
+        tag.putByteArray("Layers",layers);
+        tag.putByteArray("Blocks",blocks);
+        tag.putByteArray("AddBlocks",addBlocks);
+        tag.putByteArray("Data",blockData);
+        
+        //TODO: PARSE TILE ENTITIES
+        
+        
+        //TODO: PARSE ENTITIES
+        
+    }
+
+    /**
+     * Get the block id at a coordinate
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
     public byte getBlockId(int x,int y,int z){
 
         int index =  (y * width * length) + (z * width) + x;
@@ -156,6 +205,13 @@ public class Schematic {
         return blocks[index];
     }
 
+    /**
+     * Get the block data at a coordinate
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
     public byte getBlockData(int x,int y,int z){
 
         int index =  y * width *length + z * width + x;
@@ -163,6 +219,71 @@ public class Schematic {
             return 0;
         }
         return blockData[index];
+    }
+
+    /**
+     * Get the block layer at a coordinate
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public byte getLayer(int x,int y,int z){
+
+        int index =  y * width *length + z * width + x;
+        if(index < 0 || index >= layers.length){
+            return 0;
+        }
+        return layers[index];
+    }
+
+    /**
+     * Set the block id at a coordinate
+     * @param x
+     * @param y
+     * @param z
+     * @param block
+     */
+    public void setBlockId(int x,int y,int z,byte block){
+
+        int index =  (y * width * length) + (z * width) + x;
+        if(index < 0 || index >= blocks.length){
+            return;
+        }
+        //((addBlocks[pos] << 8 )
+        blocks[index] = block;
+    }
+
+    /**
+     * Set the block data at a coordinate
+     * @param x
+     * @param y
+     * @param z
+     * @param data
+     */
+    public void setBlockData(int x,int y,int z,byte data){
+
+        int index =  y * width *length + z * width + x;
+        if(index < 0 || index >= blockData.length){
+            return;
+        }
+        blockData[index] = data;
+    }
+
+    /**
+     * Set the block layer at a coordinate
+     * @param x
+     * @param y
+     * @param z
+     * @param layer
+     */
+    public void setLayer(int x,int y,int z,byte layer){
+
+        int index =  y * width *length + z * width + x;
+        if(index < 0 || index >= layers.length){
+            return;
+        }
+        layers[index] = layer;
     }
 
     public final short getWidth() {
@@ -186,7 +307,7 @@ public class Schematic {
     public final List<Entity> getEntities() {
         return entities;
     }
-    
+
     public WorldVector getOrigin() {
         return origin;
     }
@@ -195,19 +316,16 @@ public class Schematic {
         return offset;
     }
 
-
-
-    
     public String toString(){
         return "Schematic {" +
-        		"[w: " + getWidth() + ", " +
-        		"l: " + getLength() + ", " +
-        		"h: " + getHeight() + "]\n" +
-        				"origin: " + origin + "\n" +
-        				"offset: " + offset + "\n" +
-        				"\n}";
-        		
-                
+                "[w: " + getWidth() + ", " +
+                "l: " + getLength() + ", " +
+                "h: " + getHeight() + "]\n" +
+                "origin: " + origin + "\n" +
+                "offset: " + offset + "\n" +
+                "\n}";
+
+
     }
 
 }
