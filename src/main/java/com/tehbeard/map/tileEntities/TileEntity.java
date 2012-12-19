@@ -23,7 +23,7 @@ public abstract class TileEntity {
 		this.x = tag.getInt("x");
 		this.y = tag.getInt("y");
 		this.z = tag.getInt("z");
-		this.id = tag.getName();
+		this.id = tag.getString("id");
 	}
 	public final int getX() {
 		return x;
@@ -38,5 +38,13 @@ public abstract class TileEntity {
 		return id;
 	}
 
+	public CompoundTag toTag(){
+	    CompoundTag tag = new CompoundTag();
+	    tag.putInt("x",x);
+        tag.putInt("y",y);
+        tag.putInt("z",z);
+        tag.putString("id",id);
+	    return tag;
+	}
 	
 }

@@ -25,6 +25,13 @@ public class TileNoteBlock extends TileEntity {
         return note;
     }
 
+    
+    @Override
+    public CompoundTag toTag() {
+        CompoundTag tag = super.toTag();
+        tag.putByte("note", note);
+        return tag;
+    }
 	
 
 

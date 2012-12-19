@@ -47,12 +47,12 @@ public class BukkitSchematicLoader {
         this.schematic = schematic;
     }
 
-    public void paste(Location location,int rotations){
+    public void paste(Location location,int rotations,byte[] layers){
         
         WorldVector l = new WorldVector(location.getBlockX(),location.getBlockY(),location.getBlockZ(),location.getWorld().getName());
-        addBlocks(l,0,rotations);
-        addBlocks(l,1,rotations);
-        addBlocks(l,2,rotations);
+        addBlocks(l,0,rotations,layers);
+        addBlocks(l,1,rotations,layers);
+        addBlocks(l,2,rotations,layers);
 
         World w = Bukkit.getWorld(l.getWorldName());
         for(TileEntity t:schematic.getTileEntities()){
@@ -99,7 +99,7 @@ public class BukkitSchematicLoader {
 
 
 
-    private void addBlocks(WorldVector l,int layer,int rotations){
+    private void addBlocks(WorldVector l,int blockOrder,int rotations,byte[] layers){
         World w = Bukkit.getWorld(l.getWorldName());
 
         WorldVector baseVector = new WorldVector(0, 0, 0, l.getWorldName());
@@ -108,8 +108,12 @@ public class BukkitSchematicLoader {
             for(int z = 0;z<schematic.getLength();z++){
                 for(int x = 0;x<schematic.getWidth();x++){
 
-                    if(BlockType.getOrder(schematic.getBlockId(x, y, z)) == layer){
-
+                    if(BlockType.getOrder(schematic.getBlockId(x, y, z)) == blockOrder){
+                        if(layers != null){
+                            if(!inArray(layers, schematic.getLayer(x, y, z))){
+                                continue;
+                            }
+                        }
                         WorldVector relVector = new WorldVector(schematic.getOffset());
                         relVector.addVector(new WorldVector(x, y, z, null));
                         relVector.rotateVector(rotations);
@@ -137,13 +141,14 @@ public class BukkitSchematicLoader {
             }	
         }
     }
-
-
-    public static void main(String[] args){
-        for(int i =0; i > -10; i--){
-            System.out.println("" + i + " : " + (i % 4)); 
+    
+    private boolean inArray(byte[] layers,byte b){
+        for(byte c : layers){
+            if(c==b){return true;}
         }
+        return false;
     }
+
 
     
 

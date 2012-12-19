@@ -25,7 +25,12 @@ public class TileRecordPlayer extends TileEntity {
         return record;
     }
 
-	
+    @Override
+    public CompoundTag toTag() {
+        CompoundTag tag = super.toTag();
+        tag.putByte("Record", record);
+        return tag;
+    }
 
 
 

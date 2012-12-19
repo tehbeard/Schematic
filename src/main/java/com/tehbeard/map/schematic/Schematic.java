@@ -183,6 +183,11 @@ public class Schematic {
         
         //TODO: PARSE TILE ENTITIES
         
+        ListTag<CompoundTag> tileEntitiesTag = new ListTag<CompoundTag>("TileEntities");
+        tag.put("TileEntities", tileEntitiesTag);
+        for(TileEntity te : tileEntities){
+            tileEntitiesTag.add(te.toTag());
+        }
         
         //TODO: PARSE ENTITIES
         
