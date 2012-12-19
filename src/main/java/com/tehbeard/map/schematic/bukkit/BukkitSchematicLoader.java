@@ -57,6 +57,11 @@ public class BukkitSchematicLoader {
         World w = Bukkit.getWorld(l.getWorldName());
         for(TileEntity t:schematic.getTileEntities()){
 
+            if(layers != null){
+                if(!inArray(layers, schematic.getLayer(t.getX(), t.getY(), t.getZ()))){
+                    continue;
+                }
+            }
             WorldVector relVector = new WorldVector(schematic.getOffset());
             relVector.addVector(new WorldVector(t.getX(), t.getY(),t.getZ(), null));
             relVector.rotateVector(rotations);
