@@ -15,7 +15,8 @@ public class TileChest extends TileEntity{
 
 	Item[] items = new Item[9*3];
 
-	public TileChest(CompoundTag tag) {
+	@SuppressWarnings("unchecked")
+    public TileChest(CompoundTag tag) {
 		super(tag);
 
 		items = MapUtils.makeInventory(27,(ListTag<CompoundTag>) tag.getList("Items"));

@@ -15,7 +15,8 @@ public class TileTrap extends TileEntity{
 
 	Item[] items = new Item[9];
 
-	public TileTrap(CompoundTag tag) {
+	@SuppressWarnings("unchecked")
+    public TileTrap(CompoundTag tag) {
 		super(tag);
 
 		items = MapUtils.makeInventory(9,(ListTag<CompoundTag>) tag.getList("Items"));

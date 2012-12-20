@@ -16,7 +16,8 @@ public class TileFurnace extends TileEntity{
 	Item[] items = new Item[3];
     short burn,cook;
 
-	public TileFurnace(CompoundTag tag) {
+	@SuppressWarnings("unchecked")
+    public TileFurnace(CompoundTag tag) {
 		super(tag);
 
 		items = MapUtils.makeInventory(3,(ListTag<CompoundTag>) tag.getList("Items"));

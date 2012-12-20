@@ -156,7 +156,6 @@ public class Schematic {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void saveSchematic(File file) throws IOException{
         CompoundTag tag  = new CompoundTag("schematic");
         tag.putString("Materials", "Alpha");

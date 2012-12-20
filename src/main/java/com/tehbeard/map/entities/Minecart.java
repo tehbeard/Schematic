@@ -14,6 +14,7 @@ public class Minecart extends Entity{
     private Item[] items = new Item[27];
     
     
+    @SuppressWarnings("unchecked")
     public Minecart(CompoundTag tag) {
         super(tag);
         type = tag.getInt("Type");

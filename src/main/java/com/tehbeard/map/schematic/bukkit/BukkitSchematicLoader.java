@@ -24,7 +24,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import com.tehbeard.map.misc.ItemEnchantment;
 import com.tehbeard.map.misc.Item;
-import com.tehbeard.map.misc.MapUtils;
 import com.tehbeard.map.misc.WorldVector;
 import com.tehbeard.map.schematic.BlockType;
 import com.tehbeard.map.schematic.Schematic;
@@ -48,56 +47,65 @@ public class BukkitSchematicLoader {
     }
 
     public void paste(Location location,int rotations,byte[] layers){
-        
+
         WorldVector l = new WorldVector(location.getBlockX(),location.getBlockY(),location.getBlockZ(),location.getWorld().getName());
         addBlocks(l,0,rotations,layers);
         addBlocks(l,1,rotations,layers);
         addBlocks(l,2,rotations,layers);
 
         World w = Bukkit.getWorld(l.getWorldName());
+
         for(TileEntity t:schematic.getTileEntities()){
+            try{
 
-            if(layers != null){
-                if(!inArray(layers, schematic.getLayer(t.getX(), t.getY(), t.getZ()))){
-                    continue;
+                if(layers != null){
+                    if(!inArray(layers, schematic.getLayer(t.getX(), t.getY(), t.getZ()))){
+                        continue;
+                    }
                 }
-            }
-            WorldVector relVector = new WorldVector(schematic.getOffset());
-            relVector.addVector(new WorldVector(t.getX(), t.getY(),t.getZ(), null));
-            relVector.rotateVector(rotations);
-            
-            Block b = w.getBlockAt(location.clone().add(
-                    relVector.getX(),
-                    relVector.getY(),
-                    relVector.getZ()
-                    )
-                    );
+                WorldVector relVector = new WorldVector(schematic.getOffset());
+                relVector.addVector(new WorldVector(t.getX(), t.getY(),t.getZ(), null));
+                relVector.rotateVector(rotations);
 
-            if(t instanceof TileChest){
-                placeChest(b,(TileChest) t);
-            }
+                Block b = w.getBlockAt(location.clone().add(
+                        relVector.getX(),
+                        relVector.getY(),
+                        relVector.getZ()
+                        )
+                        );
 
-            if(t instanceof TileTrap){
-                placeDispenser(b,(TileTrap)t);
-            }
-            if(t instanceof TileSign){
-                placeSign(b,(TileSign)t);
-            }
+                if(t instanceof TileChest){
+                    placeChest(b,(TileChest) t);
+                }
 
-            if(t instanceof TileNoteBlock){
-                placeNoteBlock(b,(TileNoteBlock)t);
+                if(t instanceof TileTrap){
+                    placeDispenser(b,(TileTrap)t);
+                }
+                if(t instanceof TileSign){
+                    placeSign(b,(TileSign)t);
+                }
+
+                if(t instanceof TileNoteBlock){
+                    placeNoteBlock(b,(TileNoteBlock)t);
+                }
+                if(t instanceof TileFurnace){
+                    placeFurnace(b,(TileFurnace)t);
+                }
+                if(t instanceof TileCauldron){
+                    placeBrewStand(b,(TileCauldron)t);
+                }
+                if(t instanceof TileRecordPlayer){
+                    placeJukebox(b,(TileRecordPlayer)t);
+                }
+                if(t instanceof TileSpawner){
+                    placeSpawner(b, (TileSpawner) t);
+                }
+
             }
-            if(t instanceof TileFurnace){
-                placeFurnace(b,(TileFurnace)t);
-            }
-            if(t instanceof TileCauldron){
-                placeBrewStand(b,(TileCauldron)t);
-            }
-            if(t instanceof TileRecordPlayer){
-                placeJukebox(b,(TileRecordPlayer)t);
-            }
-            if(t instanceof TileSpawner){
-                placeSpawner(b, (TileSpawner) t);
+            catch(Exception e){
+                System.out.println("Error occurred while intializing a tile entity");
+                System.out.println("Coordinates: " + t.getX() +"," + t.getY()+"," + t.getZ());
+                System.out.println("Tile entity: " + t.toString());
             }
         }
     }
@@ -146,7 +154,7 @@ public class BukkitSchematicLoader {
             }	
         }
     }
-    
+
     private boolean inArray(byte[] layers,byte b){
         for(byte c : layers){
             if(c==b){return true;}
@@ -155,7 +163,7 @@ public class BukkitSchematicLoader {
     }
 
 
-    
+
 
 
     private static void placeChest(Block b,TileChest chest){
@@ -224,21 +232,21 @@ public class BukkitSchematicLoader {
 
     private static ItemStack makeItemStack(Item item){
         ItemStack is = new ItemStack(item.getId(),item.getCount(),item.getDamage());
-        
+
         ItemMeta meta = is.getItemMeta();
-        
+
         for(ItemEnchantment e : item.getEnchantments()){
             meta.addEnchant(Enchantment.getById(e.getType()), e.getLvl(),true);
         }
-        
+
         if(item.getName()!=null){
             meta.setDisplayName(item.getName());
         }
-        
+
         if(item.getLore()!=null){
             meta.setLore(item.getLore());
         }
-        
+
         switch(is.getType()){
         case BOOK_AND_QUILL:
         case  WRITTEN_BOOK:
@@ -256,7 +264,7 @@ public class BukkitSchematicLoader {
             break;
         }
 
-        
+
         is.setItemMeta(meta);
         return is;
 

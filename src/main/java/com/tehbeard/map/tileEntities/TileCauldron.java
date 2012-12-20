@@ -16,6 +16,7 @@ public class TileCauldron extends TileEntity{
 	private Item[] items = new Item[4];
 	private short brew;
 
+    @SuppressWarnings("unchecked")
     public TileCauldron(CompoundTag tag) {
 		super(tag);
 

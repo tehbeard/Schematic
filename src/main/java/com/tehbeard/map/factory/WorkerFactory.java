@@ -1,7 +1,5 @@
 package com.tehbeard.map.factory;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.entities.ItemFrame;

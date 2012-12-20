@@ -6,7 +6,6 @@ import java.util.List;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
 import com.tehbeard.mojang.nbt.StringTag;
-import com.tehbeard.mojang.nbt.Tag;
 
 public class Item {
 
@@ -116,6 +115,7 @@ public class Item {
         return tag.contains("author") ? tag.getString("author") : null;
     }
     
+    @SuppressWarnings("unchecked")
     public List<String> getBookPages(){
         ArrayList<String> pages = new ArrayList<String>();
         for(StringTag page : (ListTag<StringTag>)tag.getList("pages")){
