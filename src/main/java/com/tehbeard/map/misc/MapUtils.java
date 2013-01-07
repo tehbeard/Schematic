@@ -15,6 +15,17 @@ public class MapUtils {
         return ii;
     }
     
+    public static Item[] makeItemList(int size,ListTag<CompoundTag> items){
+        Item[] itemArray = new Item[size];
+        int i = 0;
+        for(CompoundTag t : (ListTag<CompoundTag>) items){
+            Item item = new Item(t);
+            itemArray[i]=item;
+            i++;
+        }
+        return itemArray;
+    }
+    
     public static void printCon(String line){
         System.out.println("[Schematic] " + line);
     }
