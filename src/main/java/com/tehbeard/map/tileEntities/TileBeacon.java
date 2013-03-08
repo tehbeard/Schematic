@@ -4,7 +4,7 @@ import com.tehbeard.map.factory.DataType;
 import com.tehbeard.map.misc.ItemPotionEffect;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
-@DataType("Control")
+@DataType("BEacon")
 public class TileBeacon extends TileNameable{
 
 	private int levels;
