@@ -7,12 +7,12 @@ import com.tehbeard.map.factory.DataType;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 
-@DataType("Trap")
-public class TileTrap extends TileContainer{
+@DataType("Hopper")
+public class TileHopper extends TileContainer{
 
 
-    public TileTrap(CompoundTag tag) {
-		super(tag,9);
+    public TileHopper(CompoundTag tag) {
+		super(tag,5);
 
 	}
 
