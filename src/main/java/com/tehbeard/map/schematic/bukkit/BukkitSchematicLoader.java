@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.block.Chest;
 import org.bukkit.block.CreatureSpawner;
@@ -17,6 +18,7 @@ import org.bukkit.block.NoteBlock;
 import org.bukkit.block.Sign;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -28,6 +30,7 @@ import com.tehbeard.map.misc.WorldVector;
 import com.tehbeard.map.schematic.BlockType;
 import com.tehbeard.map.schematic.Schematic;
 import com.tehbeard.map.schematic.bukkit.worldedit.BlockData;
+import com.tehbeard.map.tileEntities.TileBeacon;
 import com.tehbeard.map.tileEntities.TileEntity;
 import com.tehbeard.map.tileEntities.TileNoteBlock;
 import com.tehbeard.map.tileEntities.TileRecordPlayer;
@@ -35,6 +38,7 @@ import com.tehbeard.map.tileEntities.TileSign;
 import com.tehbeard.map.tileEntities.TileSpawner;
 import com.tehbeard.map.tileEntities.container.TileCauldron;
 import com.tehbeard.map.tileEntities.container.TileChest;
+import com.tehbeard.map.tileEntities.container.TileContainer;
 import com.tehbeard.map.tileEntities.container.TileFurnace;
 import com.tehbeard.map.tileEntities.container.TileTrap;
 
@@ -74,20 +78,22 @@ public class BukkitSchematicLoader {
                         )
                         );
 
-                if(t instanceof TileChest){
-                    placeChest(b,(TileChest) t);
+                //Handle container blocks
+                if(t instanceof TileContainer){
+                	setInventory(b,(TileContainer) t);
                 }
 
-                if(t instanceof TileTrap){
-                    placeDispenser(b,(TileTrap)t);
-                }
+                //Sign text
                 if(t instanceof TileSign){
                     placeSign(b,(TileSign)t);
                 }
 
+                //MOOSIC
                 if(t instanceof TileNoteBlock){
                     placeNoteBlock(b,(TileNoteBlock)t);
                 }
+                
+                //Burn time
                 if(t instanceof TileFurnace){
                     placeFurnace(b,(TileFurnace)t);
                 }
@@ -99,6 +105,9 @@ public class BukkitSchematicLoader {
                 }
                 if(t instanceof TileSpawner){
                     placeSpawner(b, (TileSpawner) t);
+                }
+                if(t instanceof TileBeacon){
+                	placeBeacon(b,(TileBeacon) t);
                 }
 
             }
@@ -112,7 +121,8 @@ public class BukkitSchematicLoader {
 
 
 
-    private void addBlocks(WorldVector l,int blockOrder,int rotations,byte[] layers){
+
+	private void addBlocks(WorldVector l,int blockOrder,int rotations,byte[] layers){
         World w = Bukkit.getWorld(l.getWorldName());
 
         WorldVector baseVector = new WorldVector(0, 0, 0, l.getWorldName());
@@ -164,22 +174,22 @@ public class BukkitSchematicLoader {
 
 
 
-
-
-    private static void placeChest(Block b,TileChest chest){
-        Chest c = (Chest)b.getState();
-        Inventory i = c.getBlockInventory();
-        doInventory(i, chest.getItems());
-        c.update(true);
-    }
-
-    private static void placeDispenser(Block b, TileTrap trap) {
-        Dispenser c = (Dispenser)b.getState();
+    private static void placeBeacon(Block b, TileBeacon t) {
+		
+		
+	}
+    
+    
+    private static void setInventory(Block b,TileContainer container){
+    	BlockState bs = b.getState();
+    	InventoryHolder c = (InventoryHolder)bs;
         Inventory i = c.getInventory();
-        doInventory(i, trap.getItems());
-        c.update(true);
-
+        doInventory(i, container.getItems());
+        bs.update(true);
     }
+    
+
+   
 
     private static void placeSign(Block b, TileSign t) {
         Sign s = (Sign) b.getState();
@@ -201,20 +211,14 @@ public class BukkitSchematicLoader {
 
     private static void placeFurnace(Block b, TileFurnace t) {
         Furnace f = (Furnace) b.getState();
-
         f.setBurnTime(t.getBurn());
         f.setCookTime(t.getCook());
-        doInventory(f.getInventory(), t.getItems());
         f.update(true);
     }
 
     private static void placeBrewStand(Block b, TileCauldron t) {
         BrewingStand bs = (BrewingStand)b.getState();
         bs.setBrewingTime(t.getBrew());
-
-
-        doInventory(bs.getInventory(), t.getItems());
-
         bs.update(true);
     }
 

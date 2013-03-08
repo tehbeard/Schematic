@@ -18,7 +18,7 @@ public class TileHopper extends TileContainer{
 
     @Override
 	public String toString() {
-		return "TileTrap [items=" + Arrays.toString(getItems()) + "]";
+		return "TileHopper [items=" + Arrays.toString(getItems()) + "]";
 	}
 	
 

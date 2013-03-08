@@ -71,7 +71,7 @@ public class WorkerFactory {
         instance = new WorkerFactory();
         
         //Tile entities
-        instance.addTileEntity(TileSign.class);
+        instance.addTileEntity(TileSkull.class);
         instance.addTileEntity(TileTrap.class);
         instance.addTileEntity(TileChest.class);
         instance.addTileEntity(TileFurnace.class);
