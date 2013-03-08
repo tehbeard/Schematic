@@ -28,15 +28,15 @@ import com.tehbeard.map.misc.WorldVector;
 import com.tehbeard.map.schematic.BlockType;
 import com.tehbeard.map.schematic.Schematic;
 import com.tehbeard.map.schematic.bukkit.worldedit.BlockData;
-import com.tehbeard.map.tileEntities.TileCauldron;
-import com.tehbeard.map.tileEntities.TileChest;
 import com.tehbeard.map.tileEntities.TileEntity;
-import com.tehbeard.map.tileEntities.TileFurnace;
 import com.tehbeard.map.tileEntities.TileNoteBlock;
 import com.tehbeard.map.tileEntities.TileRecordPlayer;
 import com.tehbeard.map.tileEntities.TileSign;
 import com.tehbeard.map.tileEntities.TileSpawner;
-import com.tehbeard.map.tileEntities.TileTrap;
+import com.tehbeard.map.tileEntities.container.TileCauldron;
+import com.tehbeard.map.tileEntities.container.TileChest;
+import com.tehbeard.map.tileEntities.container.TileFurnace;
+import com.tehbeard.map.tileEntities.container.TileTrap;
 
 public class BukkitSchematicLoader {
 

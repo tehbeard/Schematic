@@ -7,6 +7,10 @@ import com.tehbeard.map.entities.Minecart;
 import com.tehbeard.map.entities.Painting;
 import com.tehbeard.map.entities.mob.*;
 import com.tehbeard.map.tileEntities.*;
+import com.tehbeard.map.tileEntities.container.TileCauldron;
+import com.tehbeard.map.tileEntities.container.TileChest;
+import com.tehbeard.map.tileEntities.container.TileFurnace;
+import com.tehbeard.map.tileEntities.container.TileTrap;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 import me.tehbeard.utils.factory.ConfigurableFactory;
