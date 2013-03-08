@@ -9,7 +9,9 @@ import com.tehbeard.map.entities.mob.*;
 import com.tehbeard.map.tileEntities.*;
 import com.tehbeard.map.tileEntities.container.TileCauldron;
 import com.tehbeard.map.tileEntities.container.TileChest;
+import com.tehbeard.map.tileEntities.container.TileDropper;
 import com.tehbeard.map.tileEntities.container.TileFurnace;
+import com.tehbeard.map.tileEntities.container.TileHopper;
 import com.tehbeard.map.tileEntities.container.TileTrap;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
@@ -72,6 +74,7 @@ public class WorkerFactory {
         
         //Tile entities
         instance.addTileEntity(TileSkull.class);
+        instance.addTileEntity(TileSign.class);
         instance.addTileEntity(TileTrap.class);
         instance.addTileEntity(TileChest.class);
         instance.addTileEntity(TileFurnace.class);
@@ -79,6 +82,13 @@ public class WorkerFactory {
         instance.addTileEntity(TileNoteBlock.class);
         instance.addTileEntity(TileSpawner.class);
         instance.addTileEntity(TileCauldron.class);
+        instance.addTileEntity(TileBeacon.class);
+        instance.addTileEntity(TileHopper.class);
+        instance.addTileEntity(TileDropper.class);
+        instance.addTileEntity(TileDLDetector.class);
+        instance.addTileEntity(TileCommandBlock.class);
+        instance.addTileEntity(TileEnchantTable.class);
+        
         
         //mob entities
         instance.addEntity(Creeper.class);
