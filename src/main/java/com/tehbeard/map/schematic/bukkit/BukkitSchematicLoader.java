@@ -230,7 +230,7 @@ public class BukkitSchematicLoader {
         spawner.setCreatureTypeByName(t.getId());
     }
 
-    private static ItemStack makeItemStack(Item item){
+    public static ItemStack makeItemStack(Item item){
         ItemStack is = new ItemStack(item.getId(),item.getCount(),item.getDamage());
 
         ItemMeta meta = is.getItemMeta();
@@ -270,7 +270,7 @@ public class BukkitSchematicLoader {
 
     }
 
-    private static void doInventory(Inventory inv, Item[] items){
+    public static void doInventory(Inventory inv, Item[] items){
         for(Item item : items){
             if(item == null){continue;}
 
