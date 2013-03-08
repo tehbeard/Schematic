@@ -4,13 +4,7 @@ import java.util.Arrays;
 
 
 import com.tehbeard.map.factory.DataType;
-import com.tehbeard.map.misc.Item;
-import com.tehbeard.map.misc.MapUtils;
-import com.tehbeard.map.tileEntities.TileEntity;
-import com.tehbeard.map.tileEntities.TileNameable;
 import com.tehbeard.mojang.nbt.CompoundTag;
-import com.tehbeard.mojang.nbt.ListTag;
-
 
 @DataType("Cauldron")
 public class TileCauldron extends TileContainer{
@@ -18,7 +12,6 @@ public class TileCauldron extends TileContainer{
 	
 	private short brew;
 
-    @SuppressWarnings("unchecked")
     public TileCauldron(CompoundTag tag) {
 		super(tag,4);
 		
