@@ -7,6 +7,10 @@ import java.util.Map;
 public enum BlockType{
 	//blocks that rely on other blocks being there
 	
+	CHEST(54,0,BlockRotation.CONTAINER_PISTON),
+	FURNACE_OFF(61,0,BlockRotation.CONTAINER_PISTON),
+	FURNACE_ON(62,0,BlockRotation.CONTAINER_PISTON),
+	
 	//redstone
 	REDSTONE_WIRE(55,1),
 	STONE_PRESSURE_PLATE(70,1),

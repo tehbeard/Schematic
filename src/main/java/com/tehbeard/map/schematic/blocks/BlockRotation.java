@@ -81,14 +81,50 @@ public enum BlockRotation {
 			if(rot < 0){
 				rot = 4 - (rot%4);
 			}
+			
 			for(int i =0; i< rot;i++){
 				r = ((data << 1) | (data >> 3)) & 0xf;
 			}
 			return r;
 		}}),
 		BIG_MUSHROOM(null),
-		DOOR(null),
-		SIGN_POST(null),
+		DOOR(new RotateFunction(){
+
+			public int rotate(int data, int rotations) {
+
+
+				int isTop = data & 0x8;
+				if(isTop != 0 ){
+					return data;
+
+				}else{
+					if(rotations < 0){
+						rotations = 4 - (rotations%4);
+					}
+					int extra = data & ~0x3;
+					int rotateData = data & 0x3;
+					for(int i =0; i<rotations;i++){
+						
+						switch(rotateData){
+						case 0: rotateData = 1;break;
+						case 1: rotateData = 2;break;
+						case 2: rotateData = 3;break;
+						case 3: rotateData = 0;break;
+						}
+					}
+					return rotateData | extra;
+				}
+				
+			}
+		}),
+		SIGN_POST(new RotateFunction(){
+
+			public int rotate(int data, int rotations) {
+				return (data + 4) % 16;
+			}
+
+
+		}),
 
 
 		;
