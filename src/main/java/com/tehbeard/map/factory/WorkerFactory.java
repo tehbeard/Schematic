@@ -5,7 +5,12 @@ import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.entities.ItemFrame;
 import com.tehbeard.map.entities.Painting;
 import com.tehbeard.map.entities.mob.*;
+import com.tehbeard.map.entities.vehicles.MinecartChest;
+import com.tehbeard.map.entities.vehicles.MinecartFurnace;
+import com.tehbeard.map.entities.vehicles.MinecartHopper;
 import com.tehbeard.map.entities.vehicles.MinecartRidable;
+import com.tehbeard.map.entities.vehicles.MinecartSpawner;
+import com.tehbeard.map.entities.vehicles.MinecartTNT;
 import com.tehbeard.map.tileEntities.*;
 import com.tehbeard.map.tileEntities.container.TileCauldron;
 import com.tehbeard.map.tileEntities.container.TileChest;
@@ -108,6 +113,11 @@ public class WorkerFactory {
         
         //other entities
         instance.addEntity(MinecartRidable.class);
+        instance.addEntity(MinecartChest.class);
+        instance.addEntity(MinecartFurnace.class);
+        instance.addEntity(MinecartHopper.class);
+        instance.addEntity(MinecartSpawner.class);
+        instance.addEntity(MinecartTNT.class);
         instance.addEntity(ItemFrame.class);
         instance.addEntity(Painting.class);
         
