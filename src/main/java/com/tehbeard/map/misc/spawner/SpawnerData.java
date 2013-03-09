@@ -34,7 +34,7 @@ public class SpawnerData {
 		}
 		
 		entityId = tag.getString("EntityId");
-		spawnData = WorkerFactory.getInstance().getEntity(entityId,tag.getCompound("SpawnData"));
+		spawnData = WorkerFactory.getInstance().getEntity(tag.getCompound("SpawnData"));
 		
 		spawnCount = tag.getShort("spawnCount");
 		spawnRange = tag.getShort("spawnRange");

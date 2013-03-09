@@ -127,7 +127,7 @@ public class Schematic {
 
         for(CompoundTag tileEntity  : tileEntityTag){
 
-            TileEntity t = WorkerFactory.getInstance().getTileEntity(tileEntity.getString("id"), tileEntity);
+            TileEntity t = WorkerFactory.getInstance().getTileEntity( tileEntity);
 
             if(t!=null){
                 MapUtils.printDebugCon(t.toString());
@@ -143,7 +143,7 @@ public class Schematic {
 
         for(CompoundTag entity  : entityTag){
 
-            Entity e = WorkerFactory.getInstance().getEntity(entity.getString("id"), entity);
+            Entity e = WorkerFactory.getInstance().getEntity(entity);
 
             if(e!=null){
                 MapUtils.printDebugCon(e.toString());

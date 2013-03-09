@@ -120,8 +120,8 @@ public class WorkerFactory {
      * @param data
      * @return
      */
-    public TileEntity getTileEntity(String id,CompoundTag data){
-        return tileEntityFactory.make(id, data);
+    public TileEntity getTileEntity(CompoundTag data){
+        return tileEntityFactory.make(data.getString("id"), data);
     }
     
     /**
@@ -130,8 +130,8 @@ public class WorkerFactory {
      * @param data
      * @return
      */
-    public Entity getEntity(String id,CompoundTag data){
-        return entityFactory.make(id, data);
+    public Entity getEntity(CompoundTag data){
+        return entityFactory.make(data.getString("id"), data);
     }
     
 

@@ -13,7 +13,7 @@ public class SpawnPotential {
 	public SpawnPotential(CompoundTag tag){
 		type   = tag.getString("Type");
 		weight = tag.getInt("Weight");
-		properties = WorkerFactory.getInstance().getEntity(type, tag.getCompound("Properties"));
+		properties = WorkerFactory.getInstance().getEntity(tag.getCompound("Properties"));
 	}
 
 	public String getType() {
