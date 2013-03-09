@@ -9,9 +9,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.BrewingStand;
-import org.bukkit.block.Chest;
 import org.bukkit.block.CreatureSpawner;
-import org.bukkit.block.Dispenser;
 import org.bukkit.block.Furnace;
 import org.bukkit.block.Jukebox;
 import org.bukkit.block.NoteBlock;
@@ -36,10 +34,8 @@ import com.tehbeard.map.tileEntities.TileRecordPlayer;
 import com.tehbeard.map.tileEntities.TileSign;
 import com.tehbeard.map.tileEntities.TileSpawner;
 import com.tehbeard.map.tileEntities.container.TileCauldron;
-import com.tehbeard.map.tileEntities.container.TileChest;
 import com.tehbeard.map.tileEntities.container.TileContainer;
 import com.tehbeard.map.tileEntities.container.TileFurnace;
-import com.tehbeard.map.tileEntities.container.TileTrap;
 
 public class BukkitSchematicLoader {
 
