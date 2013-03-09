@@ -146,9 +146,12 @@ public class BukkitSchematicLoader {
 						int type = schematic.getBlockId(x, y, z) & 0xFF;
 						byte data = schematic.getBlockData(x, y, z);
 
-						BlockRotation r = BlockType.getByID(type).rotate;
-						if(r != null){
-							data = (byte) r.rotate(data, rotations);
+						BlockType bt = BlockType.getByID(type);
+						if(bt!=null){
+							BlockRotation r = bt.rotate;
+							if(r != null){
+								data = (byte) r.rotate(data, rotations);
+							}
 						}
 						b.setTypeId(type,false);
 						b.setData(data,false);
