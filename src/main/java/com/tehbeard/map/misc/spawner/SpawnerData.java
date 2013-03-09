@@ -36,14 +36,14 @@ public class SpawnerData {
 		entityId = tag.getString("EntityId");
 		spawnData = WorkerFactory.getInstance().getEntity(tag.getCompound("SpawnData"));
 		
-		spawnCount = tag.getShort("spawnCount");
-		spawnRange = tag.getShort("spawnRange");
-		delay = tag.getShort("delay");
-		minSpawnDelay = tag.getShort("minSpawnDelay");
-		maxSpawnDelay = tag.getShort("maxSpawnDelay");
+		spawnCount = tag.getShort("SpawnCount");
+		spawnRange = tag.getShort("SpawnRange");
+		delay = tag.getShort("Delay");
+		minSpawnDelay = tag.getShort("MinSpawnDelay");
+		maxSpawnDelay = tag.getShort("MaxSpawnDelay");
 		
-		maxNearbyEntities = tag.getShort("maxNearbyEntities");
-		requiredPlayerRange = tag.getShort("requiredPlayerRange");
+		maxNearbyEntities = tag.getShort("MaxNearbyEntities");
+		requiredPlayerRange = tag.getShort("RequiredPlayerRange");
 		
 		
 	}
