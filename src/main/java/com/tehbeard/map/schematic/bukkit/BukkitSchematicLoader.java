@@ -29,7 +29,6 @@ import com.tehbeard.map.misc.Item;
 import com.tehbeard.map.misc.WorldVector;
 import com.tehbeard.map.schematic.BlockType;
 import com.tehbeard.map.schematic.Schematic;
-import com.tehbeard.map.schematic.bukkit.worldedit.BlockData;
 import com.tehbeard.map.tileEntities.TileBeacon;
 import com.tehbeard.map.tileEntities.TileEntity;
 import com.tehbeard.map.tileEntities.TileNoteBlock;
@@ -149,9 +148,8 @@ public class BukkitSchematicLoader {
 
                         int type = schematic.getBlockId(x, y, z) & 0xFF;
                         byte data = schematic.getBlockData(x, y, z);
-                        for(int i =0;i<rotations;i++){
-                            data = (byte) BlockData.rotate90(type, data);
-                        }
+                        
+                        data = (byte) BlockType.getByID(type).rotate.rotate(data, rotations);
                         b.setTypeId(type,false);
                         b.setData(data,false);
 
