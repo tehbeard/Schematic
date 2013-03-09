@@ -3,9 +3,9 @@ package com.tehbeard.map.factory;
 
 import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.entities.ItemFrame;
-import com.tehbeard.map.entities.Minecart;
 import com.tehbeard.map.entities.Painting;
 import com.tehbeard.map.entities.mob.*;
+import com.tehbeard.map.entities.vehicles.MinecartRidable;
 import com.tehbeard.map.tileEntities.*;
 import com.tehbeard.map.tileEntities.container.TileCauldron;
 import com.tehbeard.map.tileEntities.container.TileChest;
@@ -104,7 +104,7 @@ public class WorkerFactory {
         instance.addEntity(Zombie.class);
         
         //other entities
-        instance.addEntity(Minecart.class);
+        instance.addEntity(MinecartRidable.class);
         instance.addEntity(ItemFrame.class);
         instance.addEntity(Painting.class);
         

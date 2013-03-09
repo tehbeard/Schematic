@@ -12,7 +12,7 @@ public class Enderman extends MobEntity{
     
     public Enderman(CompoundTag tag) {
         super(tag);
-        carried = new Item(tag);
+        //carried = new Item();TODO: WRITE ITEM DESERIALIZER FOR ENDERMAN DATA
     }
 
     public Item getCarried() {
