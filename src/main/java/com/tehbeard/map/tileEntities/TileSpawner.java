@@ -1,36 +1,50 @@
 package com.tehbeard.map.tileEntities;
 
+import java.util.List;
+
+import com.tehbeard.map.entities.Entity;
 import com.tehbeard.map.factory.DataType;
+import com.tehbeard.map.misc.spawner.SpawnPotential;
+import com.tehbeard.map.misc.spawner.SpawnerData;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 @DataType("MobSpawner")
 public class TileSpawner extends TileEntity {
 
-    private String type;
-    private int delay;
+    private SpawnerData spawnerData;
+    
     public TileSpawner(CompoundTag tag) {
         super(tag);
-        type = tag.getString("EntityId");
-        delay = tag.getShort("Delay");
-        //TODO: UPDATE THIS SHIT, WAY OUT OF DATE THANKS TO DINNERBONE
+        spawnerData = new SpawnerData(tag);
     }
 
 
     @Override
     public String toString() {
-        return "TileMobSpawner [type=" + type+ "]";
+        return "TileMobSpawner [TODO]";
     }
 
 
-    public String getType() {
-        return type;
-    }
+    public List<SpawnPotential> getSpawnPotentials() { return  spawnerData.getSpawnPotentials(); } 
 
+    @Deprecated
+    public String getEntityId() { return  spawnerData.getEntityId(); } 
 
-    
+    @Deprecated
+    public Entity getSpawnData() { return  spawnerData.getSpawnData(); } 
 
-    public int getDelay() {
-        return delay;
-    }
+    public short getSpawnCount() { return  spawnerData.getSpawnCount(); } 
+
+    public short getSpawnRange() { return  spawnerData.getSpawnRange(); } 
+
+    public short getDelay() { return  spawnerData.getDelay(); } 
+
+    public short getMinSpawnDelay() { return  spawnerData.getMinSpawnDelay(); } 
+
+    public short getMaxSpawnDelay() { return  spawnerData.getMaxSpawnDelay(); } 
+
+    public short getMaxNearbyEntities() { return  spawnerData.getMaxNearbyEntities(); } 
+
+    public short getRequiredPlayerRange() { return  spawnerData.getRequiredPlayerRange(); } 
 
 }
