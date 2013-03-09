@@ -79,7 +79,10 @@ public abstract class Entity {
     public boolean isInvulnerable() {
         return invulnerable;
     }
-   
-    
-    
+
+
+	public Entity getRiding() {
+		return riding;
+	}
+  
 }
