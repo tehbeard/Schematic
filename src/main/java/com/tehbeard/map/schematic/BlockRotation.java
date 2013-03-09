@@ -71,14 +71,27 @@ public enum BlockRotation {
 		}
 
 	}),
-	VINES(null),
-	BIG_MUSHROOM(null),
-	TRACK(null),
-	DOOR(null),
-	SIGN_POST(null),
+	VINES(new RotateFunction(){
+
+		public int rotate(int data, int rotations) {
+
+			int r = 0;
+			int rot = rotations;
+
+			if(rot < 0){
+				rot = 4 - (rot%4);
+			}
+			for(int i =0; i< rot;i++){
+				r = ((data << 1) | (data >> 3)) & 0xf;
+			}
+			return r;
+		}}),
+		BIG_MUSHROOM(null),
+		DOOR(null),
+		SIGN_POST(null),
 
 
-	;
+		;
 
 	BlockRotation(int mask, int... rotations){
 		this.mask = mask;
