@@ -1,5 +1,6 @@
 package com.tehbeard.map.entities;
 
+import com.tehbeard.map.factory.WorkerFactory;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.DoubleTag;
 import com.tehbeard.mojang.nbt.FloatTag;
@@ -18,6 +19,8 @@ public abstract class Entity {
     
     private boolean invulnerable;
     
+    private Entity riding;
+    
     @SuppressWarnings("unchecked")
     public Entity(CompoundTag tag) {
         id = tag.getString("id");
@@ -31,6 +34,8 @@ public abstract class Entity {
         pitch = ((ListTag<FloatTag>) tag.getList("Rotation")).get(1).data;
         
         invulnerable = tag.getBoolean("Invulnerable");
+        
+        riding = WorkerFactory.getInstance().getEntity(tag.getCompound("Riding"));
     }
 
     
