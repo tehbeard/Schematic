@@ -13,6 +13,9 @@ import com.tehbeard.map.tileEntities.container.TileDropper;
 import com.tehbeard.map.tileEntities.container.TileFurnace;
 import com.tehbeard.map.tileEntities.container.TileHopper;
 import com.tehbeard.map.tileEntities.container.TileTrap;
+import com.tehbeard.map.tileEntities.redstone.TileCommandBlock;
+import com.tehbeard.map.tileEntities.redstone.TileDLDetector;
+import com.tehbeard.map.tileEntities.redstone.TileNoteBlock;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 import me.tehbeard.utils.factory.ConfigurableFactory;

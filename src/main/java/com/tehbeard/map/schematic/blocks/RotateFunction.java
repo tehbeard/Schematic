@@ -1,4 +1,4 @@
-package com.tehbeard.map.schematic;
+package com.tehbeard.map.schematic.blocks;
 
 public interface RotateFunction {
 

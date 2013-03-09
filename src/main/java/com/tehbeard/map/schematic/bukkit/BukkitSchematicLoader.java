@@ -22,20 +22,20 @@ import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import com.tehbeard.map.misc.ItemEnchantment;
-import com.tehbeard.map.misc.Item;
 import com.tehbeard.map.misc.WorldVector;
-import com.tehbeard.map.schematic.BlockType;
+import com.tehbeard.map.misc.items.Item;
+import com.tehbeard.map.misc.items.ItemEnchantment;
 import com.tehbeard.map.schematic.Schematic;
+import com.tehbeard.map.schematic.blocks.BlockType;
 import com.tehbeard.map.tileEntities.TileBeacon;
 import com.tehbeard.map.tileEntities.TileEntity;
-import com.tehbeard.map.tileEntities.TileNoteBlock;
 import com.tehbeard.map.tileEntities.TileRecordPlayer;
 import com.tehbeard.map.tileEntities.TileSign;
 import com.tehbeard.map.tileEntities.TileSpawner;
 import com.tehbeard.map.tileEntities.container.TileCauldron;
 import com.tehbeard.map.tileEntities.container.TileContainer;
 import com.tehbeard.map.tileEntities.container.TileFurnace;
+import com.tehbeard.map.tileEntities.redstone.TileNoteBlock;
 
 public class BukkitSchematicLoader {
 

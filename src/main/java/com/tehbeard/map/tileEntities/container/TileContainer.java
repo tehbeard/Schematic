@@ -1,7 +1,7 @@
 package com.tehbeard.map.tileEntities.container;
 
-import com.tehbeard.map.misc.Item;
 import com.tehbeard.map.misc.MapUtils;
+import com.tehbeard.map.misc.items.Item;
 import com.tehbeard.map.tileEntities.TileNameable;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;

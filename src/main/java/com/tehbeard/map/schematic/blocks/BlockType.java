@@ -1,4 +1,4 @@
-package com.tehbeard.map.schematic;
+package com.tehbeard.map.schematic.blocks;
 
 import java.util.EnumSet;
 import java.util.HashMap;

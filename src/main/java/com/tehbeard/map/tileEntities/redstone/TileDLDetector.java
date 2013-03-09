@@ -1,6 +1,7 @@
-package com.tehbeard.map.tileEntities;
+package com.tehbeard.map.tileEntities.redstone;
 
 import com.tehbeard.map.factory.DataType;
+import com.tehbeard.map.tileEntities.TileNameable;
 import com.tehbeard.mojang.nbt.CompoundTag;
 
 @DataType("DLDetector")

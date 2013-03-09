@@ -1,5 +1,6 @@
 package com.tehbeard.map.misc;
 
+import com.tehbeard.map.misc.items.Item;
 import com.tehbeard.mojang.nbt.CompoundTag;
 import com.tehbeard.mojang.nbt.ListTag;
 
