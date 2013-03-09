@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tehbeard.map.entities.Entity;
 import com.tehbeard.mojang.nbt.CompoundTag;
+import com.tehbeard.mojang.nbt.ListTag;
 
 public class SpawnerData {
 	
@@ -24,8 +25,11 @@ public class SpawnerData {
 	private short maxNearbyEntities;
 	private short requiredPlayerRange;
 	
+	@SuppressWarnings("unchecked")
 	public SpawnerData(CompoundTag tag){
 		
-		
+		for( CompoundTag spTag : (ListTag<CompoundTag>) tag.getList("SpawnPotentials")){
+			spawnPotentials.add(new SpawnPotential(spTag));
+		}
 	}
 }
