@@ -11,6 +11,7 @@ public enum BlockType{
 	FURNACE_OFF(61,0,BlockRotation.CONTAINER_PISTON),
 	FURNACE_ON(62,0,BlockRotation.CONTAINER_PISTON),
 	
+	
 	//redstone
 	REDSTONE_WIRE(55,1),
 	STONE_PRESSURE_PLATE(70,1),
@@ -32,6 +33,7 @@ public enum BlockType{
 	PISTON_STICKY_BASE(33,1,BlockRotation.CONTAINER_PISTON),
 	TRIPWIRE_HOOK(131,1,BlockRotation.HOOK),
 	TRIPWIRE(132,1),
+	FENCE_GATE(107,1,BlockRotation.FENCEGATE),
 	
 	//rail
 	POWERED_RAIL(27,1,BlockRotation.RAIL),

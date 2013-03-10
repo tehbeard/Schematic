@@ -83,9 +83,10 @@ public enum BlockRotation {
 			}
 			
 			for(int i =0; i< rot;i++){
-				r = ((data << 1) | (data >> 3)) & 0xf;
+				if((data & 0x1) != 0){data+=16;}
+				data = ((data << 1) | (data >> 3)) & 0xf;
 			}
-			return r;
+			return data;
 		}}),
 		BIG_MUSHROOM(null),
 		DOOR(new RotateFunction(){
