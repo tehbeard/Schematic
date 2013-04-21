@@ -1,7 +1,5 @@
 package com.tehbeard.map.schematic.bukkit;
 
-
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -137,11 +135,11 @@ public class BukkitSchematicLoader {
 						relVector.addVector(new WorldVector(x, y, z, null));
 						relVector.rotateVector(rotations);
 						relVector.addVector(baseVector);
-						Block b = w.getBlockAt(
+						BlockState b = w.getBlockAt(
 								relVector.getBlockX(), 
 								relVector.getBlockY(),
 								relVector.getBlockZ()
-								);
+								).getState();
 
 						int type = schematic.getBlockId(x, y, z) & 0xFF;
 						byte data = schematic.getBlockData(x, y, z);
@@ -153,11 +151,11 @@ public class BukkitSchematicLoader {
 								data = (byte) r.rotate(data, rotations);
 							}
 						}
-						b.setTypeId(type,false);
-						b.setData(data,false);
+						b.setTypeId(type);
+						b.setRawData(data);
 
 
-						b.getState().update();
+						b.update(true,false);
 
 					}
 

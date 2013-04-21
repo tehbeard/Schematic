@@ -29,7 +29,7 @@ public class WorldVector {
         x = v.x;
         y = v.y;
         z = v.z;
-        worldName = v.worldName;
+        worldName = new String(v.worldName);
        
     }
     

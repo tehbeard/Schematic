@@ -28,8 +28,8 @@ public class TileBeacon extends TileNameable{
 	public int getSecondary() {
 		return secondary;
 	}
-
-
+	
+	
 
 
 	public TileBeacon(CompoundTag tag) {

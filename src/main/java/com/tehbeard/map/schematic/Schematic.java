@@ -23,14 +23,10 @@ import com.tehbeard.mojang.nbt.NbtIo;
  */
 public class Schematic {
 
-
-
-
     //SIZE
     private short width = 0;
     private short height = 0;
     private short length = 0;
-
 
     //Original location in world
     private WorldVector origin;
