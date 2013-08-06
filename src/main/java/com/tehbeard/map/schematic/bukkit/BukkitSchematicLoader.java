@@ -265,6 +265,8 @@ public class BukkitSchematicLoader {
 				((SkullMeta)meta).setOwner(item.getSkullOwner());
 			}
 			break;
+		default:
+			break;
 		}
 
 

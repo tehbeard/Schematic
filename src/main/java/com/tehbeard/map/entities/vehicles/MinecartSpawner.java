@@ -9,7 +9,6 @@ public class MinecartSpawner extends Minecart{
 
 	private SpawnerData spawnerData;
 	
-	@SuppressWarnings("unchecked")
 	public MinecartSpawner(CompoundTag tag) {
 		super(tag);
 		spawnerData = new SpawnerData(tag);

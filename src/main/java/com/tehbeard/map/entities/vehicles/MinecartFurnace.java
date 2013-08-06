@@ -10,7 +10,6 @@ public class MinecartFurnace extends Minecart{
 	private double pushZ;
 	private short fuel;
 	
-	@SuppressWarnings("unchecked")
 	public MinecartFurnace(CompoundTag tag) {
 		super(tag);
 		fuel = tag.getShort("Fuel");

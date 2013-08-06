@@ -7,3 +7,4 @@ commands:
     pastein:
         description: Paste in 
         usage: /<command>
+        permission: schematic.paste

@@ -17,17 +17,15 @@ public class TestPlugin extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command,
             String label, String[] args) {
-        // TODO Auto-generated method stub
         
         Schematic schematic = null;
         try {
-            schematic = new Schematic(new File("C:/Users/James/Desktop/BeardAch test area/plugins/WorldEdit/schematics/test.schematic"));
+            schematic = new Schematic(new File("plugins/WorldEdit/schematics/",args[0] + ".schematic"));
             System.out.println(schematic.toString());
             BukkitSchematicLoader loader = new BukkitSchematicLoader(schematic);
-            loader.paste(((Player)sender).getLocation(), Integer.parseInt(args[0]), new byte[] {Byte.parseByte(args[1])});
+            loader.paste(((Player)sender).getLocation(), Integer.parseInt(args[1]), new byte[] {Byte.parseByte(args[2])});
             
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         

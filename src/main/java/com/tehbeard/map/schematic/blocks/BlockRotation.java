@@ -74,8 +74,6 @@ public enum BlockRotation {
 	VINES(new RotateFunction(){
 
 		public int rotate(int data, int rotations) {
-
-			int r = 0;
 			int rot = rotations;
 
 			if(rot < 0){
