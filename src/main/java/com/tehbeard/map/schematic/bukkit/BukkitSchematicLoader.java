@@ -1,7 +1,6 @@
 package com.tehbeard.map.schematic.bukkit;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.Bukkit; 
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -44,14 +43,14 @@ public class BukkitSchematicLoader {
 		this.schematic = schematic;
 	}
 
-	public void paste(Location location,int rotations,byte[] layers){
+	public void paste(WorldVector location,int rotations,byte[] layers){
 
-		WorldVector l = new WorldVector(location.getBlockX(),location.getBlockY(),location.getBlockZ(),location.getWorld().getName());
-		addBlocks(l,0,rotations,layers);
-		addBlocks(l,1,rotations,layers);
-		addBlocks(l,2,rotations,layers);
+		WorldVector baseVector = new WorldVector(location);
+		addBlocks(baseVector,0,rotations,layers);
+		addBlocks(baseVector,1,rotations,layers);
+		addBlocks(baseVector,2,rotations,layers);
 
-		World w = Bukkit.getWorld(l.getWorldName());
+		World w = Bukkit.getWorld(baseVector.getWorldName());
 
 		for(TileEntity t:schematic.getTileEntities()){
 			try{
@@ -64,12 +63,12 @@ public class BukkitSchematicLoader {
 				WorldVector relVector = new WorldVector(schematic.getOffset());
 				relVector.addVector(new WorldVector(t.getX(), t.getY(),t.getZ(), null));
 				relVector.rotateVector(rotations);
+				relVector.addVector(baseVector);
 
-				Block b = w.getBlockAt(location.clone().add(
-						relVector.getX(),
-						relVector.getY(),
-						relVector.getZ()
-						)
+				Block b = w.getBlockAt(
+						relVector.getBlockX(),
+						relVector.getBlockY(),
+						relVector.getBlockZ()
 						);
 
 				//Handle container blocks

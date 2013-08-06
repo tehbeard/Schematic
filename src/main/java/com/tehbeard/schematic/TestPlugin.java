@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.tehbeard.map.misc.WorldVector;
 import com.tehbeard.map.schematic.Schematic;
 import com.tehbeard.map.schematic.bukkit.BukkitSchematicLoader;
 
@@ -23,7 +24,13 @@ public class TestPlugin extends JavaPlugin {
             schematic = new Schematic(new File("plugins/WorldEdit/schematics/",args[0] + ".schematic"));
             System.out.println(schematic.toString());
             BukkitSchematicLoader loader = new BukkitSchematicLoader(schematic);
-            loader.paste(((Player)sender).getLocation(), Integer.parseInt(args[1]), new byte[] {Byte.parseByte(args[2])});
+            WorldVector loc = new WorldVector(((Player)sender).getLocation());
+            if(args.length == 3){
+            	if(args[2].equals("-o")){
+            		loc = schematic.getOrigin();
+            	}
+            }
+            loader.paste(loc, Integer.parseInt(args[1]), new byte[] {Byte.parseByte(args[2])});
             
         } catch (IOException e) {
             e.printStackTrace();
